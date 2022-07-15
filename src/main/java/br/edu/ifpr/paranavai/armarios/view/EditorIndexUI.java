@@ -1,4 +1,4 @@
-package br.edu.ifpr.paranavai.armarios.visao;
+package br.edu.ifpr.paranavai.armarios.view;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -48,7 +48,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
         };
         painelConteudo = new javax.swing.JPanel();
         painelEsquerdo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         painelDireito = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -82,10 +82,16 @@ public class EditorIndexUI extends javax.swing.JFrame {
         });
         painelEsquerdo.setLayout(new java.awt.GridLayout(1, 2));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Acesso para Empréstimos");
-        painelEsquerdo.add(jLabel1);
+        jButton1.setBackground(new java.awt.Color(60, 63, 65));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("Acesso para empréstimos");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        painelEsquerdo.add(jButton1);
 
         painelConteudo.add(painelEsquerdo);
 
@@ -99,7 +105,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
                 painelDireitoMouseExited(evt);
             }
         });
-        painelDireito.setLayout(new java.awt.GridLayout());
+        painelDireito.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -145,6 +151,12 @@ public class EditorIndexUI extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_painelDireitoMouseExited
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        EditorLoginUI telaLogin = new EditorLoginUI();
+        telaLogin.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,7 +194,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel painelBackground;

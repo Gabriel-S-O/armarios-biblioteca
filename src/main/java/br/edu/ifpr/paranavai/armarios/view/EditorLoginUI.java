@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.edu.ifpr.paranavai.armarios.visao;
+package br.edu.ifpr.paranavai.armarios.view;
 
-import br.edu.ifpr.paranavai.armarios.controle.LoginControlador;
+import br.edu.ifpr.paranavai.armarios.controller.LoginController;
 
 /**
  *
@@ -116,7 +116,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFieldEmailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        LoginControlador controle = new LoginControlador();
+        LoginController controle = new LoginController();
         String email = this.txtFieldEmail.getText();
         String senha = String.copyValueOf(this.passFieldSenha.getPassword());
         String resposta = controle.verifica(email, senha);

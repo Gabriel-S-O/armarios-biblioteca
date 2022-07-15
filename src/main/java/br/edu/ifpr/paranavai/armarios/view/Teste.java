@@ -1,6 +1,6 @@
-package br.edu.ifpr.paranavai.armarios.visao;
+package br.edu.ifpr.paranavai.armarios.view;
 
-import br.edu.ifpr.paranavai.armarios.modelo.Bibliotecario;
+import br.edu.ifpr.paranavai.armarios.model.Bibliotecario;
 
 public class Teste {
     public static void main(String[] args) {
