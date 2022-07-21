@@ -5,6 +5,7 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
+import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -170,9 +171,9 @@ public class EditorLoginUI extends javax.swing.JFrame {
             LoginController controle = new LoginController();
             String documento = this.txtFieldEmail.getText();
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
-            String resposta = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
+            InfoDTO response = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
             jLabel3.setForeground(Color.red);
-            jLabel3.setText(resposta);
+            jLabel3.setText(response.getMessage());
         } catch (Exception ex) {
             Logger.getLogger(EditorLoginUI.class.getName()).log(Level.SEVERE, null, ex);
         }

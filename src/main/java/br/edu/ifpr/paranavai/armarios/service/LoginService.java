@@ -4,6 +4,7 @@ import br.edu.ifpr.paranavai.armarios.exceptions.NullCpfException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
+import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
 /**        
  * 
@@ -15,7 +16,9 @@ public class LoginService {
     
     Estudante estudante = new Estudante();
     
-    public static String verifica(String ra, String senha) throws NullRaException, NullPasswordException{
+    public InfoDTO verifica(String ra, String senha) throws NullRaException, NullPasswordException{
+        String message = new String();
+        InfoDTO info = new InfoDTO();
         
         if(ra == null){ 
             throw new NullRaException();
@@ -25,16 +28,24 @@ public class LoginService {
             throw new NullPasswordException();
         }
         
-       if (ra.equals("20220012345")){
-           if (senha.equals("12345")){
-                return "Sucesso no login!";
+       if (ra.equals(estudante.getRa())){
+           if (senha.equals(estudante.getSenha())){
+                message = "Sucesso no login!";
+                info.setMessage(message);
+                info.setObject(estudante);
+                return info;
            }
-           return "Senha inválida!";
+           message = "Senha inválida!";
+           info.setMessage(message);
+           return info;
        }
-       return "RA inválido!";         
+       message = "RA inválido!";  
+       info.setMessage(message);
+       return info; 
     }
     
-    public static String verificaCPF(String cpf, String senha) throws NullCpfException, NullPasswordException{
+    public InfoDTO verificaCPF(String cpf, String senha) throws NullCpfException, NullPasswordException{
+        InfoDTO info = new InfoDTO();
         
         if(cpf == null){ 
             throw new NullCpfException();
@@ -46,11 +57,17 @@ public class LoginService {
         
        if (cpf.equals("000.000.000-00")){
            if (senha.equals("12345")){
-                return "Sucesso no login!";
+                String message = "Sucesso no login!";
+                info.setMessage(message);
+                return info;
            }
-           return "Senha inválida!";
+           String message = "Senha inválida!";
+           info.setMessage(message);
+           return info;
        }
-       return "CPF inválido!";         
+        String message = "CPF inválido!";
+        info.setMessage(message);
+        return info;    
     }
     
 }
