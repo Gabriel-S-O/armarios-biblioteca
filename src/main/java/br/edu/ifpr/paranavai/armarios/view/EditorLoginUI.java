@@ -5,6 +5,9 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,6 +15,8 @@ import br.edu.ifpr.paranavai.armarios.controller.LoginController;
  */
 public class EditorLoginUI extends javax.swing.JFrame {
 
+    private static boolean validaRa = true;
+    
     /**
      * Creates new form AuthEditorUI
      */
@@ -35,12 +40,14 @@ public class EditorLoginUI extends javax.swing.JFrame {
         passFieldSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         lblResposta = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("E-mail");
+        jLabel1.setText("RA");
 
-        txtFieldEmail.setText("Insira o e-mail");
         txtFieldEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFieldEmailActionPerformed(evt);
@@ -49,7 +56,12 @@ public class EditorLoginUI extends javax.swing.JFrame {
 
         jLabel2.setText("Senha");
 
-        passFieldSenha.setText("jPasswordField1");
+        passFieldSenha.setToolTipText("");
+        passFieldSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passFieldSenhaActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Autenticar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,12 +72,33 @@ public class EditorLoginUI extends javax.swing.JFrame {
 
         lblResposta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("RA");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton3.setText("CPF");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(44, 44, 44)
+                .addComponent(lblResposta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -73,26 +106,43 @@ public class EditorLoginUI extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                             .addComponent(passFieldSenha)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jButton1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addComponent(jRadioButton3)
+                        .addGap(44, 44, 44)))
                 .addContainerGap(67, Short.MAX_VALUE))
-            .addComponent(lblResposta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(147, 147, 147))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton3))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(txtFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(passFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblResposta)
                 .addGap(28, 28, 28))
         );
@@ -116,12 +166,33 @@ public class EditorLoginUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFieldEmailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        LoginController controle = new LoginController();
-        String email = this.txtFieldEmail.getText();
-        String senha = String.copyValueOf(this.passFieldSenha.getPassword());
-        String resposta = controle.verifica(email, senha);
-        lblResposta.setText(resposta);
+        try {
+            LoginController controle = new LoginController();
+            String documento = this.txtFieldEmail.getText();
+            String senha = String.copyValueOf(this.passFieldSenha.getPassword());
+            String resposta = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
+            jLabel3.setForeground(Color.red);
+            jLabel3.setText(resposta);
+        } catch (Exception ex) {
+            Logger.getLogger(EditorLoginUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+           jRadioButton3.setSelected(false);
+           jLabel1.setText("RA");
+           validaRa = true;
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void passFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passFieldSenhaActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        jRadioButton1.setSelected(false);
+        jLabel1.setText("CPF");
+        validaRa = false;
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +234,10 @@ public class EditorLoginUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel lblResposta;
     private javax.swing.JPasswordField passFieldSenha;
     private javax.swing.JTextField txtFieldEmail;
