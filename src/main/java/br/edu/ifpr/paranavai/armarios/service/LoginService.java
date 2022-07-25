@@ -7,6 +7,10 @@ import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.view.EditorLoginUI;
 import br.edu.ifpr.paranavai.armarios.view.EditorReservaUI;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 
 /**        
  * 
@@ -18,7 +22,7 @@ public class LoginService {
     
     Estudante estudante = new Estudante();
     
-    public InfoDTO verifica(String ra, String senha) throws NullRaException, NullPasswordException{
+    public InfoDTO verifica(String ra, String senha) throws NullRaException, NullPasswordException, IOException{
         String message = new String();
         InfoDTO info = new InfoDTO();
         
@@ -33,10 +37,17 @@ public class LoginService {
        if (ra.equals(estudante.getRa())){
            if (senha.equals(estudante.getSenha())){
                 message = "Sucesso no login!";
-                info.setMessage(message);
-                info.setObject(estudante);
-                
+               info.setMessage(message);
+               info.setObject(estudante);
                 EditorReservaUI telaReserva = new EditorReservaUI(info);
+                
+                try {
+                   URL resource = telaReserva.getClass().getResource("/icones/icon-window.png");
+                   BufferedImage image = ImageIO.read(resource);
+                   telaReserva.setIconImage(image);
+               } catch (IOException iOException) {
+               }
+                
                 telaReserva.setTitle("Reserva");
                 telaReserva.setVisible(true);
                 
