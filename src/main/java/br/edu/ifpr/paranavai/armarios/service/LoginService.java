@@ -5,6 +5,8 @@ import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
+import br.edu.ifpr.paranavai.armarios.view.EditorLoginUI;
+import br.edu.ifpr.paranavai.armarios.view.EditorReservaUI;
 
 /**        
  * 
@@ -33,6 +35,11 @@ public class LoginService {
                 message = "Sucesso no login!";
                 info.setMessage(message);
                 info.setObject(estudante);
+                
+                EditorReservaUI telaReserva = new EditorReservaUI(info);
+                telaReserva.setTitle("Reserva");
+                telaReserva.setVisible(true);
+                
                 return info;
            }
            message = "Senha inválida!";

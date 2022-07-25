@@ -23,6 +23,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
      */
     public EditorLoginUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -174,6 +175,8 @@ public class EditorLoginUI extends javax.swing.JFrame {
             InfoDTO response = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
             jLabel3.setForeground(Color.red);
             jLabel3.setText(response.getMessage());
+            dispose();
+            
         } catch (Exception ex) {
             Logger.getLogger(EditorLoginUI.class.getName()).log(Level.SEVERE, null, ex);
         }
