@@ -10,6 +10,7 @@ package br.edu.ifpr.paranavai.armarios.utils;
  */
 public class InfoDTO {
     private String message;
+    private boolean error;
     private Object object;
 
     public String getMessage() {
@@ -27,6 +28,18 @@ public class InfoDTO {
     public void setObject(Object object) {
         this.object = object;
     }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    
+    
+    
     
     
 }

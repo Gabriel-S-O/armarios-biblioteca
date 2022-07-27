@@ -174,9 +174,12 @@ public class EditorLoginUI extends javax.swing.JFrame {
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
             InfoDTO response = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
             jLabel3.setForeground(Color.red);
-            jLabel3.setText(response.getMessage());
-            dispose();
-            
+            if(response.isError()){
+                jLabel3.setText(response.getMessage());
+            }else{
+               dispose();
+            }
+                      
         } catch (Exception ex) {
             Logger.getLogger(EditorLoginUI.class.getName()).log(Level.SEVERE, null, ex);
         }
