@@ -88,8 +88,8 @@ public class LoginService {
             throw new NullPasswordException();
         }
 
-        if (cpf.equals("000.000.000-00")) {
-            if (senha.equals("12345")) {
+        if (cpf.equals(estudante.getCpf())) {
+            if (senha.equals(estudante.getSenha())) {
                 String message = "Sucesso no login!";
                 info.setError(false);
                 info.setMessage(message);
