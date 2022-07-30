@@ -7,8 +7,13 @@ package br.edu.ifpr.paranavai.armarios.view;
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -175,7 +180,24 @@ public class EditorLoginUI extends javax.swing.JFrame {
             InfoDTO response = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
             jLabel3.setForeground(Color.red);
             jLabel3.setText(response.getMessage());
-            dispose();
+            
+            if(response.getObject() == null) {
+                JOptionPane.showMessageDialog(rootPane, response.getMessage());
+            } else {
+                EditorReservaUI telaReserva = new EditorReservaUI(response);
+                
+                try {
+                    URL resource = telaReserva.getClass().getResource("/icones/icon-window.png");
+                    BufferedImage image = ImageIO.read(resource);
+                    telaReserva.setIconImage(image);
+                } catch (IOException iOException) {
+                }
+                
+                telaReserva.setTitle("Reserva");
+                telaReserva.setVisible(true);
+                
+                dispose();
+            }
             
         } catch (Exception ex) {
             Logger.getLogger(EditorLoginUI.class.getName()).log(Level.SEVERE, null, ex);

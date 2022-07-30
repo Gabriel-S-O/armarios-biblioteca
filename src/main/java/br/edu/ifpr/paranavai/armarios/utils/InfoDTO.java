@@ -6,7 +6,7 @@ package br.edu.ifpr.paranavai.armarios.utils;
 
 /**
  *
- * @author Nextage
+ * @author Yago Macinelli
  */
 public class InfoDTO {
     private String message;

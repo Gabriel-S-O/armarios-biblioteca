@@ -6,11 +6,10 @@ package br.edu.ifpr.paranavai.armarios.controller;
 
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.service.ReservaService;
-import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
 /**
  *
- * @author Nextage
+ * @author Yago Macinelli
  */
 public class ReservaController {
     

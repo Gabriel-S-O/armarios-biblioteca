@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author Nextage
+ * @author Yago Macinelli
  */
 public class Emprestimos {
     private List<Reserva> emprestimos;

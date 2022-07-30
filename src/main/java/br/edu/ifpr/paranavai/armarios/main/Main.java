@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 public class Main {
 
     public static void main(String[] args){
+        
         EditorIndexUI telaInicial = new EditorIndexUI();
         try {
             URL resource = telaInicial.getClass().getResource("/icones/icon-window.png");

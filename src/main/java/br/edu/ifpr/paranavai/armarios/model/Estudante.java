@@ -4,10 +4,7 @@ public class Estudante extends Pessoa{
     private String ra;
     private boolean emprestado;
     
-    public Estudante(){
-        super("Yago", "12306612300", "yago@gmail.com", "44991119471", "senha", true, null, null);
-        this.ra = "1234567890";
-    }
+    public Estudante(){}
 
     public boolean getEmprestado() {
         return emprestado;

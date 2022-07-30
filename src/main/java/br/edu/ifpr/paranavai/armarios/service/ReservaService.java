@@ -27,11 +27,12 @@ public class ReservaService {
         if (estudante.getEmprestado()!= true) {
             Reserva reserva = new Reserva();
             
+            estudante.setEmprestado(true);
             reserva.setArmario(armario);
             reserva.setDataHoraEmprestimo(date);
             reserva.setEstudante(estudante);
             
-            return "Armário reservado com sucesso!";
+            return ("Armário " + armario.getNumero() + " reservado com sucesso!");
         } else {
             return "Já possui um armário reservado!";
         }
