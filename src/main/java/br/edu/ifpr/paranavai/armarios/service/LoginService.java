@@ -37,6 +37,7 @@ public class LoginService {
 
         if (ra.equals(estudante.getRa())) {
             if (senha.equals(estudante.getSenha())) {
+                estudante.setEmprestado(true);
                 message = "Sucesso no login!";
                 info.setMessage(message);
                 info.setError(false);
