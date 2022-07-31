@@ -68,7 +68,7 @@ public class Pessoa {
         this.senha = senha;
     }
 
-    public boolean isAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
@@ -91,5 +91,4 @@ public class Pessoa {
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
-     
 }

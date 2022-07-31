@@ -4,6 +4,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /*
@@ -154,6 +158,15 @@ public class EditorIndexUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
         EditorLoginUI telaLogin = new EditorLoginUI();
+        
+        try {
+            URL resource = telaLogin.getClass().getResource("/icones/icon-window.png");
+            BufferedImage image = ImageIO.read(resource);
+            telaLogin.setIconImage(image);
+        } catch (IOException iOException) {
+        }
+        
+        telaLogin.setTitle("Login");
         telaLogin.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

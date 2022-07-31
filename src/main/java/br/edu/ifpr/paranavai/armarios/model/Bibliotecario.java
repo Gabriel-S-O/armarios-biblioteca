@@ -8,7 +8,7 @@ public class Bibliotecario extends Pessoa{
     public Bibliotecario() {
     }
 
-    public Bibliotecario(String siape, String cpf, String nome, String email, String telefone, String senha, boolean ativo, Date dataAtualizacao, Date dataCriacao) {
+    public Bibliotecario(String siape, String cpf, String nome, String email, String telefone, String senha, int chave, boolean ativo, Date dataAtualizacao, Date dataCriacao) {
         super(nome, cpf, email, telefone, senha, ativo, dataAtualizacao, dataCriacao);
         this.siape = siape;
     }
