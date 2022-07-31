@@ -48,8 +48,7 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Você está em posse da chave " + estudante.getChave()
-        );
+        jLabel1.setText("Você está em posse da chave " + estudante.getChave());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

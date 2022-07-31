@@ -7,6 +7,7 @@ package br.edu.ifpr.paranavai.armarios.view;
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
+import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +30,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
     public EditorLoginUI() {
         initComponents();
         this.setLocationRelativeTo(null);
+        inputIdentificador.setDocument(new OnlyNumbers());
     }
 
     /**
@@ -42,7 +44,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtFieldEmail = new javax.swing.JTextField();
+        inputIdentificador = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         passFieldSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
@@ -56,9 +58,9 @@ public class EditorLoginUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setText("RA");
 
-        txtFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+        inputIdentificador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFieldEmailActionPerformed(evt);
+                inputIdentificadorActionPerformed(evt);
             }
         });
 
@@ -112,7 +114,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
                         .addGap(87, 87, 87)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                            .addComponent(inputIdentificador, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                             .addComponent(passFieldSenha)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -142,7 +144,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,14 +172,14 @@ public class EditorLoginUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldEmailActionPerformed
+    private void inputIdentificadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdentificadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFieldEmailActionPerformed
+    }//GEN-LAST:event_inputIdentificadorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             LoginController controle = new LoginController();
-            String documento = this.txtFieldEmail.getText();
+            String documento = this.inputIdentificador.getText();
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
             InfoDTO response = validaRa ? controle.verifica(documento, senha) : controle.verificaCPF(documento, senha);
 
@@ -274,6 +276,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField inputIdentificador;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -283,6 +286,5 @@ public class EditorLoginUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel lblResposta;
     private javax.swing.JPasswordField passFieldSenha;
-    private javax.swing.JTextField txtFieldEmail;
     // End of variables declaration//GEN-END:variables
 }

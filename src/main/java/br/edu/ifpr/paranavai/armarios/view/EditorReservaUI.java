@@ -7,6 +7,7 @@ package br.edu.ifpr.paranavai.armarios.view;
 import br.edu.ifpr.paranavai.armarios.controller.ReservaController;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
+import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class EditorReservaUI extends javax.swing.JFrame {
         this.estudante = estudante;
         initComponents();
         this.setLocationRelativeTo(null);
+        inputNumeroArmario.setDocument(new OnlyNumbers());
     }
 
     /**
