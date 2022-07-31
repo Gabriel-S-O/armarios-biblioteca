@@ -7,8 +7,6 @@ package br.edu.ifpr.paranavai.armarios.view;
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
-import java.awt.Color;
-import java.awt.TrayIcon;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
