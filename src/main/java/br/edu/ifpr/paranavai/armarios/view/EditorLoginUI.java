@@ -5,8 +5,10 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
+import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import java.awt.Color;
+import java.awt.TrayIcon;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +24,7 @@ import javax.swing.JOptionPane;
 public class EditorLoginUI extends javax.swing.JFrame {
 
     private static boolean validaRa = true;
-    
+
     /**
      * Creates new form AuthEditorUI
      */
@@ -53,6 +55,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setText("RA");
 
         txtFieldEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +64,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel2.setText("Senha");
 
         passFieldSenha.setToolTipText("");
@@ -109,14 +113,14 @@ public class EditorLoginUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                            .addComponent(passFieldSenha)))
+                            .addComponent(passFieldSenha)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addComponent(jRadioButton3)
                         .addGap(44, 44, 44)))
                 .addContainerGap(67, Short.MAX_VALUE))
@@ -124,11 +128,11 @@ public class EditorLoginUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(147, 147, 147))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,13 +141,13 @@ public class EditorLoginUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton3))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -177,37 +181,52 @@ public class EditorLoginUI extends javax.swing.JFrame {
             LoginController controle = new LoginController();
             String documento = this.txtFieldEmail.getText();
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
-            InfoDTO response = validaRa ? controle.verifica(documento,senha) : controle.verificaCPF(documento,senha);
-            jLabel3.setForeground(Color.red);
-            jLabel3.setText(response.getMessage());
-            
-            if(response.getObject() == null) {
-                JOptionPane.showMessageDialog(rootPane, response.getMessage());
+            InfoDTO response = validaRa ? controle.verifica(documento, senha) : controle.verificaCPF(documento, senha);
+
+            Estudante estudante = (Estudante) response.getObject();
+
+            if (response.getObject() == null) {
+                JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
             } else {
-                EditorReservaUI telaReserva = new EditorReservaUI(response);
-                
-                try {
-                    URL resource = telaReserva.getClass().getResource("/icones/icon-window.png");
-                    BufferedImage image = ImageIO.read(resource);
-                    telaReserva.setIconImage(image);
-                } catch (IOException iOException) {
+                if (estudante.getEmprestado() != true) {
+                    EditorReservaUI telaReserva = new EditorReservaUI(estudante);
+
+                    try {
+                        URL resource = telaReserva.getClass().getResource("/icones/icon-window.png");
+                        BufferedImage image = ImageIO.read(resource);
+                        telaReserva.setIconImage(image);
+                    } catch (IOException iOException) {
+                    }
+
+                    telaReserva.setTitle("Reserva");
+                    telaReserva.setVisible(true);
+
+                    dispose();
+                } else {
+                    EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(estudante);
+                    
+                    try {
+                        URL resource = telaDevolucao.getClass().getResource("/icones/icon-window.png");
+                        BufferedImage image = ImageIO.read(resource);
+                        telaDevolucao.setIconImage(image);
+                    } catch (IOException iOException) {
+                    }
+
+                    telaDevolucao.setTitle("Devolução");
+                    telaDevolucao.setVisible(true);
+
+                    dispose();
                 }
-                
-                telaReserva.setTitle("Reserva");
-                telaReserva.setVisible(true);
-                
-                dispose();
             }
-            
         } catch (Exception ex) {
             Logger.getLogger(EditorLoginUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-           jRadioButton3.setSelected(false);
-           jLabel1.setText("RA");
-           validaRa = true;
+        jRadioButton3.setSelected(false);
+        jLabel1.setText("RA");
+        validaRa = true;
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void passFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldSenhaActionPerformed

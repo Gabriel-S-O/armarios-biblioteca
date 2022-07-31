@@ -11,18 +11,20 @@ public class Pessoa {
     private boolean ativo;
     private Date dataAtualizacao;
     private Date dataCriacao;
+    private int chave;
     
     public Pessoa() {
         
     }
 
-    public Pessoa(String nome, String cpf, String email, String telefone, String senha, boolean ativo, Date dataAtualizacao, Date dataCriacao) {
+    public Pessoa(String nome, String cpf, String email, String telefone, String senha, int chave, boolean ativo, Date dataAtualizacao, Date dataCriacao) {
         super();
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
+        this.chave = chave;
         this.ativo = ativo;
         this.dataAtualizacao = dataAtualizacao;
         this.dataCriacao = dataCriacao;
@@ -68,7 +70,7 @@ public class Pessoa {
         this.senha = senha;
     }
 
-    public boolean isAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
@@ -91,5 +93,12 @@ public class Pessoa {
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
-     
+
+    public int getChave() {
+        return chave;
+    }
+
+    public void setChave(int chave) {
+        this.chave = chave;
+    }
 }

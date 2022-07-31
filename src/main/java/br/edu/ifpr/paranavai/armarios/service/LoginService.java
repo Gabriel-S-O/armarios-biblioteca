@@ -6,13 +6,8 @@ import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.utils.ListEstudante;
-import br.edu.ifpr.paranavai.armarios.view.EditorLoginUI;
-import br.edu.ifpr.paranavai.armarios.view.EditorReservaUI;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -25,7 +20,9 @@ public class LoginService {
     Estudante estudante = new Estudante();
     List<Estudante> listEstudante = new ListEstudante().getListaEstudantes();
 
+
     public InfoDTO verifica(String ra, String senha) throws NullRaException, NullPasswordException, IOException {
+
         InfoDTO info = new InfoDTO();
 
         if (ra == null) {
@@ -36,15 +33,10 @@ public class LoginService {
             throw new NullPasswordException();
         }
         
-
         for (Estudante obj : listEstudante) {
 
             if (ra.equals(obj.getRa())) {
-                estudante.setRa(obj.getRa());
-                estudante.setEmail(obj.getEmail());
-                estudante.setNome(obj.getNome());
-                estudante.setSenha(obj.getSenha());
-                estudante.setTelefone(obj.getTelefone());
+                estudante = obj;
 
                 if (senha.equals(estudante.getSenha())) {
                     info.setMessage("Sucesso no login!");
@@ -75,11 +67,8 @@ public class LoginService {
         for (Estudante obj : listEstudante) {
 
             if (cpf.equals(obj.getCpf())) {
-                estudante.setRa(obj.getRa());
-                estudante.setEmail(obj.getEmail());
-                estudante.setNome(obj.getNome());
-                estudante.setSenha(obj.getSenha());
-                estudante.setTelefone(obj.getTelefone());
+                
+                estudante = obj;
 
                 if (senha.equals(estudante.getSenha())) {
                     info.setMessage("Sucesso no login!");

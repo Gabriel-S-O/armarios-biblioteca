@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class ReservaService {
     
-    public String realizaEmprestimo(Estudante estudante, String numArm){
+    public InfoDTO realizaEmprestimo(Estudante estudante, String numArm){
         InfoDTO info = new InfoDTO();
         
         Armario armario = new Armario();
@@ -32,9 +32,28 @@ public class ReservaService {
             reserva.setDataHoraEmprestimo(date);
             reserva.setEstudante(estudante);
             
-            return ("Armário " + armario.getNumero() + " reservado com sucesso!");
+            info.setError(false);
+            info.setMessage("Armário " + armario.getNumero() + " reservado com sucesso!");
+            return info;
         } else {
-            return "Já possui um armário reservado!";
+            info.setError(true);
+            info.setMessage("Já possui um armário reservado!");
+            return info;
         }
+    }
+    
+    public InfoDTO realizaDevolucao(boolean emprestado, Estudante estudante) {
+        InfoDTO info = new InfoDTO();
+        Reserva reserva = new Reserva();
+        
+        Date date = new Date();
+        reserva.setDataHoraDevolucao(date);
+        estudante.setEmprestado(emprestado);
+        reserva.setEstudante(estudante);
+        
+        info.setError(false);
+        info.setMessage("Chave devolvida com sucesso!" );
+        
+        return info;
     }
 }

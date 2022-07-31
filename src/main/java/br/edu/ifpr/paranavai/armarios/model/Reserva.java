@@ -2,6 +2,7 @@ package br.edu.ifpr.paranavai.armarios.model;
 import java.util.Date;
 
 public class Reserva {
+    
     private Estudante estudante;
     private Armario armario;
     private Date dataHoraDevolucao;

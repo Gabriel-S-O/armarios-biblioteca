@@ -24,22 +24,27 @@ public class ListEstudante {
         estudante0.setEmail("blabla@gmail.com");
         estudante0.setNome("José Utrila");
         estudante0.setRa("0987654321");
+        estudante0.setEmprestado(false);
         estudante0.setSenha("123456");
         
         Estudante estudante1 = new Estudante();
         
+        // Estudante com chave emprestada
         estudante1.setCpf("14725836900");
         estudante1.setEmail("yago@gmail.com");
         estudante1.setNome("Yago Macinelli");
         estudante1.setRa("20210023");
+        estudante1.setEmprestado(true);
         estudante1.setSenha("senha");
         
         Estudante estudante2 = new Estudante();
         
+        // Estudante com chave emprestada
         estudante2.setCpf("00000011122");
         estudante2.setEmail("terenciani@hotmail.com");
         estudante2.setNome("Marcelo Terenciani");
         estudante2.setRa("20220300");
+        estudante2.setEmprestado(true);
         estudante2.setSenha("terenciani");
         
         Estudante estudante3 = new Estudante();
@@ -48,6 +53,7 @@ public class ListEstudante {
         estudante3.setEmail("gabriel@icloud.com");
         estudante3.setNome("Gabriel Silva");
         estudante3.setRa("20190023");
+        estudante3.setEmprestado(false);
         estudante3.setSenha("senha123");
         
         Estudante estudante4 = new Estudante();
@@ -56,6 +62,7 @@ public class ListEstudante {
         estudante4.setEmail("matheus@gmail.com");
         estudante4.setNome("Matheus José");
         estudante4.setRa("20212322");
+        estudante4.setEmprestado(false);
         estudante4.setSenha("cnm10age");
         
         listaEstudantes.add(estudante0);

@@ -6,6 +6,7 @@ package br.edu.ifpr.paranavai.armarios.controller;
 
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.service.ReservaService;
+import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
 /**
  *
@@ -13,8 +14,13 @@ import br.edu.ifpr.paranavai.armarios.service.ReservaService;
  */
 public class ReservaController {
     
-    public String realizaEmprestimo(Estudante estudante, String numeroArmario) {
-        ReservaService service = new ReservaService();
+    ReservaService service = new ReservaService();
+    
+    public InfoDTO realizaEmprestimo(Estudante estudante, String numeroArmario) {
         return service.realizaEmprestimo(estudante, numeroArmario);
+    }
+    
+    public InfoDTO realizaDevolucao(boolean emprestado, Estudante estudante) {
+        return service.realizaDevolucao(emprestado, estudante);
     }
 }
