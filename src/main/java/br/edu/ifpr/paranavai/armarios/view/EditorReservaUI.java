@@ -104,7 +104,7 @@ public class EditorReservaUI extends javax.swing.JFrame {
 
         buttonConfirmar.getAccessibleContext().setAccessibleDescription("");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Hands - Pinch.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\yamacinelli\\armarios-biblioteca\\src\\main\\resources\\assets\\Hands - Pinch.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

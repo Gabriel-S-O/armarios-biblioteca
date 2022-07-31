@@ -96,7 +96,7 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
                 .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Hands - Give.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\yamacinelli\\armarios-biblioteca\\src\\main\\resources\\assets\\Hands - Give.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,9 +121,9 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
         InfoDTO response = controle.realizaDevolucao(false, estudante);
 
         if (response.getError() == true) {
-            JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } else {
+            JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
 

@@ -1,5 +1,6 @@
 package br.edu.ifpr.paranavai.armarios.model;
 public class Armario {
+    
     private String numero;
     private boolean ativo;
     private String observacoes;
