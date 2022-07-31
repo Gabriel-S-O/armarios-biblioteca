@@ -13,10 +13,10 @@ import java.util.List;
  * @author Yago Macinelli
  */
 
-public class ListEstudante {
+public class ListaEstudante {
     private List<Estudante> listaEstudantes = new ArrayList<>();
     
-    public ListEstudante() {
+    public ListaEstudante() {
         
         Estudante estudante0 = new Estudante();
         

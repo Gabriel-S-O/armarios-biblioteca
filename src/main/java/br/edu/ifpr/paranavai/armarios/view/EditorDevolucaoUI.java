@@ -9,6 +9,9 @@ import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.model.Reserva;
 import br.edu.ifpr.paranavai.armarios.service.ReservaService;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
+import br.edu.ifpr.paranavai.armarios.utils.ListaReserva;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +22,7 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
 
     private Estudante estudante;
     private Reserva reserva;
+    private String chave;
 
     /**
      * Creates new form EditorReservaUI
@@ -27,6 +31,14 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
      */
     public EditorDevolucaoUI(Estudante estudante) {
         this.estudante = estudante;
+
+        List<Reserva> listaReserva = new ListaReserva().getListaReservas();
+
+        for (Reserva obj : listaReserva) {
+            if (estudante.getRa().equals(obj.getEstudante().getRa())) {
+                this.chave = obj.getArmario().getNumero();
+            }
+        }
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -47,17 +59,19 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(412, 500));
+        setResizable(false);
 
-        jLabel1.setText("Você está em posse da chave " + estudante.getChave());
+        jLabel1.setText("Você está em posse da chave " + this.chave);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,8 +115,8 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

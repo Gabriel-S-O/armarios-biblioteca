@@ -5,7 +5,7 @@ import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
 import br.edu.ifpr.paranavai.armarios.model.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
-import br.edu.ifpr.paranavai.armarios.utils.ListEstudante;
+import br.edu.ifpr.paranavai.armarios.utils.ListaEstudante;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class LoginService {
 
     Estudante estudante = new Estudante();
-    List<Estudante> listEstudante = new ListEstudante().getListaEstudantes();
+    List<Estudante> listEstudante = new ListaEstudante().getListaEstudantes();
 
 
     public InfoDTO verifica(String ra, String senha) throws NullRaException, NullPasswordException, IOException {
