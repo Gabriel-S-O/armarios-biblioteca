@@ -4,4 +4,12 @@ Projeto desenvolvido para a biblioteca da IFPR - Campus Paranavaí, visando o co
 Será abarcado pelo sistema o login de usuário, tanto Aluno quanto Bibliotecário, onde o Aluno terá apenas duas opções de atividades: Emprestar e Devolver a chave do armário.
 
 
-Tools utilizadas no desenvolvimento: JAVA, JFrame e NetBeans.
+## Tecnologias utilizadas até o momento
+
+* Java
+* Jframe
+* JUnit 4
+
+## IDE utilizada
+
+* NetBeans
