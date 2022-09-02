@@ -47,7 +47,6 @@ public class EditorReservaUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(412, 500));
         setResizable(false);
 
         labelNumeroArmario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -108,7 +107,7 @@ public class EditorReservaUI extends javax.swing.JFrame {
 
         buttonConfirmar.getAccessibleContext().setAccessibleDescription("");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\yamacinelli\\armarios-biblioteca\\src\\main\\resources\\assets\\Hands - Pinch.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Hands - Pinch.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

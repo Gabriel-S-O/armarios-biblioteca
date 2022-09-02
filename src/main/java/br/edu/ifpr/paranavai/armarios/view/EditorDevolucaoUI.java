@@ -59,7 +59,6 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(412, 500));
         setResizable(false);
 
         jLabel1.setText("Você está em posse da chave " + this.chave);
@@ -109,7 +108,7 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
                 .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\yamacinelli\\armarios-biblioteca\\src\\main\\resources\\assets\\Hands - Give.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Hands - Give.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

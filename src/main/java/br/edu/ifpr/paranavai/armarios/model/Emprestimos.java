@@ -5,6 +5,13 @@
 package br.edu.ifpr.paranavai.armarios.model;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 /**
  *
@@ -12,12 +19,4 @@ import java.util.List;
  */
 public class Emprestimos {
     private List<Reserva> emprestimos;
-
-    public List<Reserva> getEmprestimos() {
-        return emprestimos;
-    }
-
-    public void setEmprestimos(List<Reserva> emprestimos) {
-        this.emprestimos = emprestimos;
-    }
 }
