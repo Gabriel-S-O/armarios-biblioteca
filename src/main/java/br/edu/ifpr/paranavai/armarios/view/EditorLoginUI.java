@@ -199,7 +199,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
             if (response.getObject() == null) {
                 JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (estudante.getEmprestado() != true) {
+                if (estudante.isEmprestado() != true) {
                     EditorReservaUI telaReserva = new EditorReservaUI(estudante);
 
                     try {

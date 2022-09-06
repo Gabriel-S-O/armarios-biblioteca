@@ -18,9 +18,9 @@ public class TestLoginController {
     Estudante estudante = new Estudante();
     LoginController login = new LoginController();
     
-    String cpf = "000.000.000-00";
-    String ra = "1234567890";
-    String senha = "senha";
+    String cpf = "47586912300";
+    String ra = "20190023";
+    String senha = "senha123";
     
     @Before
     public void setup(){
@@ -33,7 +33,7 @@ public class TestLoginController {
     public ErrorCollector collector = new ErrorCollector();
     
     @Test
-    public void testLogin() throws Exception {
+    public void loginTest() throws Exception {
         // cenario
         String retorno = "Sucesso no login!";
         InfoDTO info = login.verifica(estudante.getRa(), estudante.getSenha());
@@ -42,7 +42,7 @@ public class TestLoginController {
     }
     
     @Test
-    public void testLoginSenhaInvalida() throws Exception {
+    public void loginSenhaInvalidaTest() throws Exception {
         // cenario
         senha = "11111";
         estudante.setSenha(senha);
@@ -53,7 +53,7 @@ public class TestLoginController {
     }
     
     @Test
-    public void testLoginRaInvalido() throws Exception {
+    public void loginRaInvalidoTest() throws Exception {
         // cenario
         ra = "11111";
         estudante.setRa(ra);
@@ -64,13 +64,13 @@ public class TestLoginController {
     }
     
     @Test(expected = NullRaException.class)
-    public void testLoginRaNulo() throws Exception {
+    public void loginRaNuloTest() throws Exception {
         // ação
         login.verifica(null, estudante.getSenha());
     }
     
     @Test(expected = NullPasswordException.class)
-    public void testLoginSenhaNula() throws Exception {
+    public void loginSenhaNulaTest() throws Exception {
         // ação
         login.verifica(estudante.getRa(), null);
     }
@@ -78,7 +78,7 @@ public class TestLoginController {
     
     
     @Test
-    public void testLoginCPF() throws Exception {
+    public void loginCPFTest() throws Exception {
         // cenário
         InfoDTO info = login.verificaCPF(estudante.getCpf(), estudante.getSenha());
         String retorno = "Sucesso no login!";
@@ -87,7 +87,7 @@ public class TestLoginController {
     }
     
     @Test
-    public void testLoginCPFSenhaInvalida() throws Exception {
+    public void loginCPFSenhaInvalidaTest() throws Exception {
         // cenario
         senha = "11111";
         estudante.setSenha(senha);
@@ -98,7 +98,7 @@ public class TestLoginController {
     }
     
     @Test
-    public void testLoginCPFInvalido() throws Exception {
+    public void loginCPFInvalidoTest() throws Exception {
         // cenario
         cpf = "111.111.111-11";
         estudante.setCpf(cpf);
@@ -109,13 +109,13 @@ public class TestLoginController {
     }
 
     @Test(expected = NullCpfException.class)
-    public void testLoginCPFNulo() throws Exception {
+    public void loginCPFNuloTest() throws Exception {
         // ação
         login.verificaCPF(null, estudante.getSenha());
     }
     
     @Test(expected = NullPasswordException.class)
-    public void testLoginCPFSenhaNula() throws Exception {
+    public void loginCPFSenhaNulaTest() throws Exception {
         // ação
         login.verificaCPF(estudante.getSenha(), null);
     }

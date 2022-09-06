@@ -26,7 +26,7 @@ public class ReservaService {
 
         Date date = new Date();
 
-        if (estudante.getEmprestado() != true) {
+        if (estudante.isEmprestado() != true) {
 
             List<Reserva> listaReserva = new ListaReserva().getListaReservas();
 
