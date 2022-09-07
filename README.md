@@ -14,6 +14,8 @@ Será abarcado pelo sistema o Login do usuário (tanto aluno quanto bibliotecár
 * Jframe
 * JUnit 4
 * Hibernate
+* MySQL
+* Oracle Cloud (servidor onde a base de dados está hospedada)
 
 ## <center>IDE utilizada</center>
 
