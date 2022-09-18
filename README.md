@@ -1,7 +1,22 @@
-# armarios-biblioteca
+# <center>O que é o projeto ?</center>
 
-Projeto desenvolvido para a biblioteca da IFPR - Campus Paranavaí, visando o controle de empréstimo das chaves dos armários pelos alunos da própria instituição como parte da aula de Programação Orientada a Objetos do Curso de Engenharia de Software.
-Será abarcado pelo sistema o login de usuário, tanto Aluno quanto Bibliotecário, onde o Aluno terá apenas duas opções de atividades: Emprestar e Devolver a chave do armário.
+Parte da disciplina de Programação Orientada a Objetos do Curso de Engenharia de Software.
+
+Projeto desenvolvido para a biblioteca do [IFPR - Campus Paranavaí](https://paranavai.ifpr.edu.br), visando o controle de empréstimo das chaves dos armários pelos alunos da instituição.
 
 
-Tools utilizadas no desenvolvimento: JAVA, JFrame e NetBeans.
+Será abarcado pelo sistema o Login do usuário (tanto aluno quanto bibliotecário), onde o Aluno poderá escolher entre emprestar ou devolver a chave do armário.
+
+
+## <center>Tecnologias utilizadas até o momento</center>
+
+* Java
+* Jframe
+* JUnit 4
+* Hibernate
+* MySQL
+* Oracle Cloud (servidor onde a base de dados está hospedada)
+
+## <center>IDE utilizada</center>
+
+* NetBeans

@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">
+            com.mysql.jdbc.Driver
+        </property>
+        <property name="hibernate.connection.password">Z9#-WW9.n</property>
+        <property name="hibernate.connection.url">
+            jdbc:mysql://132.226.160.198:3306/armarios
+        </property>
+        <property name="hibernate.connection.username">SilvaYagoIFPR}</property>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQL8Dialect
+        </property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">false</property>
+        <property name="hbm2ddl.auto">update</property>
+        <!-- Classes que serão persistidas no tutorial -->
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Armario" />
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Bibliotecario" />
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Estudante" />
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Pessoa" />
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Reserva" />
+    </session-factory>
+</hibernate-configuration>
