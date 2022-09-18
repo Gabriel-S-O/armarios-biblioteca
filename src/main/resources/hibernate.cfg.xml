@@ -6,11 +6,11 @@
         <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
         </property>
-        <property name="hibernate.connection.password">{{senha do banco}}</property>
+        <property name="hibernate.connection.password">Z9#-WW9.n</property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://{{url do banco}}
+            jdbc:mysql://132.226.160.198:3306/armarios
         </property>
-        <property name="hibernate.connection.username">{{user do banco}}</property>
+        <property name="hibernate.connection.username">SilvaYagoIFPR}</property>
         <property name="hibernate.dialect">
             org.hibernate.dialect.MySQL8Dialect
         </property>
@@ -20,13 +20,8 @@
         <!-- Classes que serão persistidas no tutorial -->
         <mapping class="br.edu.ifpr.paranavai.armarios.model.Armario" />
         <mapping class="br.edu.ifpr.paranavai.armarios.model.Bibliotecario" />
-        <!-- Classes que serão persistidas em sala e/ou trabalho -->
-        <!--
-        <mapping class="br.edu.ifpr.paranavai.armarios.modelo.Bibliotecario" />
-        <mapping class="br.edu.ifpr.paranavai.armarios.modelo.Estudante" />
-        <mapping class="br.edu.ifpr.paranavai.armarios.modelo.Localizacao" />
-        <mapping class="br.edu.ifpr.paranavai.armarios.modelo.Pessoa" />
-        <mapping class="br.edu.ifpr.paranavai.armarios.modelo.Reserva" />
-        -->
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Estudante" />
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Pessoa" />
+        <mapping class="br.edu.ifpr.paranavai.armarios.model.Reserva" />
     </session-factory>
 </hibernate-configuration>
