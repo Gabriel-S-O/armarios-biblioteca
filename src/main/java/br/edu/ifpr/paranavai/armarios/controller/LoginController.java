@@ -8,11 +8,11 @@ public class LoginController {
     LoginService service = new LoginService();
 
     public InfoDTO verificaLoginComRA(String ra, String senha) throws Exception {
-        return service.verificaRa(ra, senha);
+        return service.verificarLoginComRA(ra, senha);
     }
 
     public InfoDTO verificaLoginComCPF(String cpf, String senha) throws Exception {
-        return service.verificaCPF(cpf, senha);
+        return service.verificarLoginComCPF(cpf, senha);
     }
 
 }
