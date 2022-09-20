@@ -192,7 +192,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
             LoginController controle = new LoginController();
             String documento = this.inputIdentificador.getText();
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
-            InfoDTO response = validaRa ? controle.verifica(documento, senha) : controle.verificaCPF(documento, senha);
+            InfoDTO response = validaRa ? controle.verificaLoginComRA(documento, senha) : controle.verificaLoginComCPF(documento, senha);
 
             Estudante estudante = (Estudante) response.getObject();
 

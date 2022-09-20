@@ -5,14 +5,14 @@ import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
 public class LoginController {
 
-    public InfoDTO verifica(String ra, String senha) throws Exception {
-        LoginService ls = new LoginService();
-        return ls.verificaRa(ra, senha);
+    LoginService loginService = new LoginService();
+
+    public InfoDTO verificaLoginComRA(String ra, String senha) throws Exception {
+        return loginService.verificaRa(ra, senha);
     }
 
-    public InfoDTO verificaCPF(String cpf, String senha) throws Exception {
-        LoginService ls = new LoginService();
-        return ls.verificaCPF(cpf, senha);
+    public InfoDTO verificaLoginComCPF(String cpf, String senha) throws Exception {
+        return loginService.verificaCPF(cpf, senha);
     }
 
 }
