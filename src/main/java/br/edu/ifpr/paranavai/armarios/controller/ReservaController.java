@@ -4,7 +4,7 @@
  */
 package br.edu.ifpr.paranavai.armarios.controller;
 
-import br.edu.ifpr.paranavai.armarios.model.Estudante;
+import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.service.ReservaService;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
@@ -20,7 +20,7 @@ public class ReservaController {
         return service.realizaEmprestimo(estudante, numeroArmario);
     }
     
-    public InfoDTO realizaDevolucao(boolean emprestado, Estudante estudante) {
+/*    public InfoDTO realizaDevolucao(boolean emprestado, Estudante estudante) {
         return service.realizaDevolucao(emprestado, estudante);
-    }
+    }*/
 }

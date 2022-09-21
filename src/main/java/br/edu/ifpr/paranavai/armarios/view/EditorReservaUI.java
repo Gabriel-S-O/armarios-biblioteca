@@ -5,7 +5,8 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.ReservaController;
-import br.edu.ifpr.paranavai.armarios.model.Estudante;
+import br.edu.ifpr.paranavai.armarios.model.Reserva;
+import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
 import javax.swing.JOptionPane;
@@ -15,8 +16,10 @@ import javax.swing.JOptionPane;
  * @author Yago Macinelli
  */
 public class EditorReservaUI extends javax.swing.JFrame {
-    
+
     private Estudante estudante;
+
+    private Reserva reserva;
 
     /**
      * Creates new form EditorReservaUI
@@ -130,7 +133,7 @@ public class EditorReservaUI extends javax.swing.JFrame {
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         ReservaController controller = new ReservaController();
-        
+
         String numeroArmario = this.inputNumeroArmario.getText();
         InfoDTO response = controller.realizaEmprestimo(this.estudante, numeroArmario);
         

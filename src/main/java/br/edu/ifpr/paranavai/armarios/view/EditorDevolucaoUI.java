@@ -5,12 +5,11 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.ReservaController;
-import br.edu.ifpr.paranavai.armarios.model.Estudante;
-import br.edu.ifpr.paranavai.armarios.model.Reserva;
-import br.edu.ifpr.paranavai.armarios.service.ReservaService;
+import br.edu.ifpr.paranavai.armarios.dao.ReservaDao;
+import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
-import br.edu.ifpr.paranavai.armarios.utils.ListaReserva;
-import java.util.Date;
+
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -32,13 +31,12 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
     public EditorDevolucaoUI(Estudante estudante) {
         this.estudante = estudante;
 
-        List<Reserva> listaReserva = new ListaReserva().getListaReservas();
+        Reserva reserva = new ReservaDao().findByEstudante(estudante);
 
-        for (Reserva obj : listaReserva) {
-            if (estudante.getRa().equals(obj.getEstudante().getRa())) {
-                this.chave = obj.getArmario().getNumero();
-            }
+        if (reserva != null) {
+            this.chave = String.valueOf(reserva.getArmario().getNumero());
         }
+
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -130,14 +128,14 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ReservaController controle = new ReservaController();
-        InfoDTO response = controle.realizaDevolucao(false, estudante);
+/*        InfoDTO response = controle.realizaDevolucao(false, estudante);
 
         if (response.getError() == true) {
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
-        }
+        }*/
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

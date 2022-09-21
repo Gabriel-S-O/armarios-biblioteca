@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Estudante extends Pessoa{
-    
+public class Estudante extends Pessoa {
+
+    private Integer id;
+
     private String ra;
-    private boolean emprestado;
-    private int chave;
 }
