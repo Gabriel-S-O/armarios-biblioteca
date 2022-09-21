@@ -16,7 +16,7 @@ public class Armario {
     private Integer id;
 
     @Column(unique = true)
-    private String numero;
+    private Integer numero;
 
     private boolean ativo;
 

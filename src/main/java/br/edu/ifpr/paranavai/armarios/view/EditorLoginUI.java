@@ -198,7 +198,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
             InfoDTO response = validaRa ? controle.verificaRa(documento, senha) : controle.verificaCPF(documento, senha);
 
-            if (response.getObject() == null) {
+            if (response.getError() == true && response.getObject() == null) {
                 JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
             } else {
                 Estudante estudante = (Estudante) response.getObject();
@@ -220,20 +220,20 @@ public class EditorLoginUI extends javax.swing.JFrame {
 
                     dispose();
                 } else {
-                    System.out.println("Passou aqui");
-/*                    EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(estudante);
+                    EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(reserva);
                     
                     try {
                         URL resource = telaDevolucao.getClass().getResource("/icones/icon-window.png");
                         BufferedImage image = ImageIO.read(resource);
                         telaDevolucao.setIconImage(image);
                     } catch (IOException iOException) {
+                        iOException.printStackTrace();
                     }
 
                     telaDevolucao.setTitle("Devolução");
                     telaDevolucao.setVisible(true);
 
-                    dispose();*/
+                    dispose();
                 }
             }
         } catch (Exception ex) {

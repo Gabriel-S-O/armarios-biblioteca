@@ -10,7 +10,11 @@ import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,21 +23,18 @@ import javax.swing.JOptionPane;
  */
 public class EditorDevolucaoUI extends javax.swing.JFrame {
 
-    private Estudante estudante;
     private Reserva reserva;
     private String chave;
 
     /**
      * Creates new form EditorReservaUI
      *
-     * @param estudante
+     * @param reserva
      */
-    public EditorDevolucaoUI(Estudante estudante) {
-        this.estudante = estudante;
+    public EditorDevolucaoUI(Reserva reserva) {
+        this.reserva = reserva;
 
-        Reserva reserva = new ReservaDao().findByEstudante(estudante);
-
-        if (reserva != null) {
+        if (reserva.getArmario().getNumero() != null) {
             this.chave = String.valueOf(reserva.getArmario().getNumero());
         }
 
@@ -128,14 +129,25 @@ public class EditorDevolucaoUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ReservaController controle = new ReservaController();
-/*        InfoDTO response = controle.realizaDevolucao(false, estudante);
+        InfoDTO response = controle.realizaDevolucao(reserva);
 
         if (response.getError() == true) {
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            EditorIndexUI editorIndexUI = new EditorIndexUI();
+
+            try {
+                URL resource = editorIndexUI.getClass().getResource("/icones/icon-window.png");
+                BufferedImage image = ImageIO.read(resource);
+                editorIndexUI.setIconImage(image);
+                editorIndexUI.setVisible(true);
+            } catch (IOException iOException) {
+                iOException.printStackTrace();
+            }
+
             dispose();
-        }*/
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

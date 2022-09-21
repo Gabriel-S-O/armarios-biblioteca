@@ -9,7 +9,12 @@ import br.edu.ifpr.paranavai.armarios.model.Reserva;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
+
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  *
@@ -141,6 +146,17 @@ public class EditorReservaUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            EditorIndexUI editorIndexUI = new EditorIndexUI();
+
+            try {
+                URL resource = editorIndexUI.getClass().getResource("/icones/icon-window.png");
+                BufferedImage image = ImageIO.read(resource);
+                editorIndexUI.setIconImage(image);
+                editorIndexUI.setVisible(true);
+            } catch (IOException iOException) {
+                iOException.printStackTrace();
+            }
+
             dispose();
         }
     }//GEN-LAST:event_buttonConfirmarActionPerformed

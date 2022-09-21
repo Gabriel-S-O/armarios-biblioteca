@@ -45,23 +45,23 @@ public class ReservaService {
         }
     }
 
-/*    public InfoDTO realizaDevolucao(boolean emprestado, Estudante estudante) {
+    public InfoDTO realizaDevolucao(Reserva reserva) {
         InfoDTO info = new InfoDTO();
-        Reserva reserva = new Reserva();
-        List<Reserva> listaReserva = new ListaReserva().getListaReservas();
+        ReservaDao reservaDao = new ReservaDao();
 
-        for (Reserva obj : listaReserva) {
-            if (estudante.getRa().equals(obj.getEstudante().getRa())) {
-                
-                Date date = new Date();
-                reserva.setDataHoraDevolucao(date);
-                estudante.setEmprestado(emprestado);
-                reserva.setEstudante(estudante);
+        try {
+            reserva.setDataHoraDevolucao(new Date());
+            reservaDao.update(reserva);
 
-                info.setError(false);
-                info.setMessage("Chave devolvida com sucesso!");
-            }
+            info.setError(false);
+            info.setMessage("Chave devolvida com sucesso!");
+            return info;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            info.setError(true);
+            info.setMessage("Problemas ao devolver chave.");
+            return info;
         }
-        return info;
-    }*/
+    }
 }
