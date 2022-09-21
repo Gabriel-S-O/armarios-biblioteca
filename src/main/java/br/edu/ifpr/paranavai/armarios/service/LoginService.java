@@ -65,14 +65,17 @@ public class LoginService {
 
         if (estudante != null) {
             if (estudante.getSenha().equals(senha)) {
+                info.setError(false);
                 info.setMessage("Sucesso no login!");
                 info.setObject(estudante);
                 return info;
             } else {
+                info.setError(true);
                 info.setMessage("Senha inválida!");
                 return info;
             }
         } else {
+            info.setError(true);
             info.setMessage("CPF inválido!");
             return info;
         }
