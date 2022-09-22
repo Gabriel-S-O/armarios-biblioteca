@@ -5,9 +5,9 @@ import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
 public class LoginController {
 
-    public InfoDTO verifica(String ra, String senha) throws Exception {
+    public InfoDTO verificaRa(String ra, String senha) throws Exception {
         LoginService ls = new LoginService();
-        return ls.verifica(ra, senha);
+        return ls.verificaRa(ra, senha);
     }
 
     public InfoDTO verificaCPF(String cpf, String senha) throws Exception {

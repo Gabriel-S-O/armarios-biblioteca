@@ -5,9 +5,13 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
-import br.edu.ifpr.paranavai.armarios.model.Estudante;
+import br.edu.ifpr.paranavai.armarios.dao.ReservaDao;
+import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
+import com.mysql.cj.util.StringUtils;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -192,14 +196,15 @@ public class EditorLoginUI extends javax.swing.JFrame {
             LoginController controle = new LoginController();
             String documento = this.inputIdentificador.getText();
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
-            InfoDTO response = validaRa ? controle.verifica(documento, senha) : controle.verificaCPF(documento, senha);
+            InfoDTO response = validaRa ? controle.verificaRa(documento, senha) : controle.verificaCPF(documento, senha);
 
-            Estudante estudante = (Estudante) response.getObject();
-
-            if (response.getObject() == null) {
+            if (response.getError() == true && response.getObject() == null) {
                 JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (estudante.isEmprestado() != true) {
+                Estudante estudante = (Estudante) response.getObject();
+                Reserva reserva = new ReservaDao().findByEstudante(estudante);
+
+                if (reserva.getDataHoraDevolucao() != null) {
                     EditorReservaUI telaReserva = new EditorReservaUI(estudante);
 
                     try {
@@ -207,6 +212,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
                         BufferedImage image = ImageIO.read(resource);
                         telaReserva.setIconImage(image);
                     } catch (IOException iOException) {
+                        iOException.printStackTrace();
                     }
 
                     telaReserva.setTitle("Reserva");
@@ -214,13 +220,14 @@ public class EditorLoginUI extends javax.swing.JFrame {
 
                     dispose();
                 } else {
-                    EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(estudante);
+                    EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(reserva);
                     
                     try {
                         URL resource = telaDevolucao.getClass().getResource("/icones/icon-window.png");
                         BufferedImage image = ImageIO.read(resource);
                         telaDevolucao.setIconImage(image);
                     } catch (IOException iOException) {
+                        iOException.printStackTrace();
                     }
 
                     telaDevolucao.setTitle("Devolução");

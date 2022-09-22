@@ -4,11 +4,13 @@
  */
 package br.edu.ifpr.paranavai.armarios.service;
 
-import br.edu.ifpr.paranavai.armarios.model.Armario;
-import br.edu.ifpr.paranavai.armarios.model.Estudante;
-import br.edu.ifpr.paranavai.armarios.model.Reserva;
+import br.edu.ifpr.paranavai.armarios.dao.ArmarioDao;
+import br.edu.ifpr.paranavai.armarios.dao.ReservaDao;
+import br.edu.ifpr.paranavai.armarios.entity.Armario;
+import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
-import br.edu.ifpr.paranavai.armarios.utils.ListaReserva;
+
 import java.util.Date;
 import java.util.List;
 
@@ -20,58 +22,46 @@ public class ReservaService {
 
     public InfoDTO realizaEmprestimo(Estudante estudante, String numArm) {
         InfoDTO info = new InfoDTO();
+        Armario armario = new ArmarioDao().findByNumero(Integer.valueOf(numArm));
+        br.edu.ifpr.paranavai.armarios.entity.Reserva reserva = new ReservaDao().findByArmario(armario);
 
-        Armario armario = new Armario();
-        armario.setNumero(numArm);
-
-        Date date = new Date();
-
-        if (estudante.isEmprestado() != true) {
-
-            List<Reserva> listaReserva = new ListaReserva().getListaReservas();
-
-            for (Reserva reserva : listaReserva) {
-                if (numArm.equals(reserva.getArmario().getNumero())) {
-                    info.setError(true);
-                    info.setMessage("Armário " + numArm + " já está reservado. Tente outro");
-                    return info;
-                }
-            }
-
-            Reserva reserva = new Reserva();
-
-            estudante.setEmprestado(true);
-            reserva.setArmario(armario);
-            reserva.setDataHoraEmprestimo(date);
-            reserva.setEstudante(estudante);
-
-            info.setError(false);
-            info.setMessage("Armário " + armario.getNumero() + " reservado com sucesso!");
+        if (reserva.getDataHoraDevolucao() == null) {
+            info.setError(true);
+            info.setMessage("Armário " + numArm + " já está reservado. Tente outro");
             return info;
         } else {
-            info.setError(true);
-            info.setMessage("Já possui um armário reservado!");
+            Reserva reservaToSave = new Reserva();
+            ReservaDao reservaDao = new ReservaDao();
+
+            reservaToSave.setEstudante(estudante);
+            reservaToSave.setDataHoraEmprestimo(new Date());
+            reservaToSave.setArmario(armario);
+
+            reservaDao.save(reservaToSave);
+
+            info.setError(false);
+            info.setMessage("Armário " + numArm + " reservado com sucesso!");
             return info;
         }
     }
 
-    public InfoDTO realizaDevolucao(boolean emprestado, Estudante estudante) {
+    public InfoDTO realizaDevolucao(Reserva reserva) {
         InfoDTO info = new InfoDTO();
-        Reserva reserva = new Reserva();
-        List<Reserva> listaReserva = new ListaReserva().getListaReservas();
+        ReservaDao reservaDao = new ReservaDao();
 
-        for (Reserva obj : listaReserva) {
-            if (estudante.getRa().equals(obj.getEstudante().getRa())) {
-                
-                Date date = new Date();
-                reserva.setDataHoraDevolucao(date);
-                estudante.setEmprestado(emprestado);
-                reserva.setEstudante(estudante);
+        try {
+            reserva.setDataHoraDevolucao(new Date());
+            reservaDao.update(reserva);
 
-                info.setError(false);
-                info.setMessage("Chave devolvida com sucesso!");
-            }
+            info.setError(false);
+            info.setMessage("Chave devolvida com sucesso!");
+            return info;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            info.setError(true);
+            info.setMessage("Problemas ao devolver chave.");
+            return info;
         }
-        return info;
     }
 }

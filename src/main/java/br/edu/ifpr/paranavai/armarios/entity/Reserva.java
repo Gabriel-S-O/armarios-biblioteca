@@ -17,10 +17,12 @@ public class Reserva {
     private Integer id;
 
     @ManyToOne
-    private Estudante estudante_id;
+    @JoinColumn(name = "estudante_id")
+    private Estudante estudante;
 
     @ManyToOne
-    private Armario armario_id;
+    @JoinColumn(name = "armario_id")
+    private Armario armario;
 
     private Date dataHoraDevolucao;
 

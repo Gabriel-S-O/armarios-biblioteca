@@ -1,13 +1,12 @@
 package br.edu.ifpr.paranavai.armarios.service;
 
+import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullCpfException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
-import br.edu.ifpr.paranavai.armarios.model.Estudante;
+import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
-import br.edu.ifpr.paranavai.armarios.utils.ListaEstudante;
 import java.io.IOException;
-import java.util.List;
 
 /**
  *
@@ -18,10 +17,8 @@ import java.util.List;
 public class LoginService {
 
     Estudante estudante = new Estudante();
-    List<Estudante> listEstudante = new ListaEstudante().getListaEstudantes();
 
-
-    public InfoDTO verifica(String ra, String senha) throws NullRaException, NullPasswordException, IOException {
+    public InfoDTO verificaRa(String ra, String senha) throws NullRaException, NullPasswordException, IOException {
 
         InfoDTO info = new InfoDTO();
 
@@ -32,25 +29,25 @@ public class LoginService {
         if (senha == null) {
             throw new NullPasswordException();
         }
-        
-        for (Estudante obj : listEstudante) {
 
-            if (ra.equals(obj.getRa())) {
-                estudante = obj;
+        estudante = new EstudanteDao().findByRa(ra);
 
-                if (senha.equals(estudante.getSenha())) {
-                    info.setMessage("Sucesso no login!");
-                    info.setObject(estudante);
-
-                    return info;
-                } else {
-                    info.setMessage("Senha inválida!");
-                    return info;
-                }
+        if (estudante != null) {
+            if (estudante.getSenha().equals(senha)) {
+                info.setError(false);
+                info.setMessage("Sucesso no login!");
+                info.setObject(estudante);
+                return info;
+            } else {
+                info.setError(true);
+                info.setMessage("Senha inválida!");
+                return info;
             }
+        } else {
+            info.setError(true);
+            info.setMessage("RA inválido!");
+            return info;
         }
-        info.setMessage("RA inválido!");
-        return info;
     }
 
     public InfoDTO verificaCPF(String cpf, String senha) throws NullCpfException, NullPasswordException {
@@ -64,24 +61,23 @@ public class LoginService {
             throw new NullPasswordException();
         }
 
-        for (Estudante obj : listEstudante) {
+        estudante = new EstudanteDao().findByCpf(cpf);
 
-            if (cpf.equals(obj.getCpf())) {
-                
-                estudante = obj;
-
-                if (senha.equals(estudante.getSenha())) {
-                    info.setMessage("Sucesso no login!");
-                    info.setObject(estudante);
-
-                    return info;
-                } else {
-                    info.setMessage("Senha inválida!");
-                    return info;
-                }
+        if (estudante != null) {
+            if (estudante.getSenha().equals(senha)) {
+                info.setError(false);
+                info.setMessage("Sucesso no login!");
+                info.setObject(estudante);
+                return info;
+            } else {
+                info.setError(true);
+                info.setMessage("Senha inválida!");
+                return info;
             }
+        } else {
+            info.setError(true);
+            info.setMessage("CPF inválido!");
+            return info;
         }
-        info.setMessage("CPF inválido!");
-        return info;
     }
 }

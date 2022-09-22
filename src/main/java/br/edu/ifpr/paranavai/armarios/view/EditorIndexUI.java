@@ -164,6 +164,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
             BufferedImage image = ImageIO.read(resource);
             telaLogin.setIconImage(image);
         } catch (IOException iOException) {
+            iOException.printStackTrace();
         }
         
         telaLogin.setTitle("Login");
