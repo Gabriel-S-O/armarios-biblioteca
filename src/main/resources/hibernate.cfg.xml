@@ -6,11 +6,11 @@
         <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
         </property>
-        <property name="hibernate.connection.password">Z9#-WW9.n</property>
+        <property name="hibernate.connection.password">{{SENHA}}</property>
         <property name="hibernate.connection.url">
             jdbc:mysql://{{URL}}/armarios
         </property>
-        <property name="hibernate.connection.username">SilvaYagoIFPR}</property>
+        <property name="hibernate.connection.username">{{USERNAME}}</property>
         <property name="hibernate.dialect">
             org.hibernate.dialect.MySQL8Dialect
         </property>
