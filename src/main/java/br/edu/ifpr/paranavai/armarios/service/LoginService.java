@@ -1,10 +1,13 @@
 package br.edu.ifpr.paranavai.armarios.service;
 
+import br.edu.ifpr.paranavai.armarios.dao.BibliotecarioDao;
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
+import br.edu.ifpr.paranavai.armarios.entity.Bibliotecario;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullCpfException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import br.edu.ifpr.paranavai.armarios.exceptions.NullSiapeException;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import java.io.IOException;
 
@@ -17,6 +20,7 @@ import java.io.IOException;
 public class LoginService {
 
     Estudante estudante = new Estudante();
+    Bibliotecario bibliotecario = new Bibliotecario();
 
     public InfoDTO verificaRa(String ra, String senha) throws NullRaException, NullPasswordException, IOException {
 
@@ -80,4 +84,18 @@ public class LoginService {
             return info;
         }
     }
+
+//    public InfoDTO verificaSiape(String siape, String senha) throws NullSiapeException, NullPasswordException {
+//        InfoDTO info = new InfoDTO();
+//        
+//        if(siape == null){
+//            throw new NullSiapeException();
+//        }
+//        
+//        if(senha == null){
+//            throw new NullPasswordException();
+//        }
+//        
+//        bibliotecario = new BibliotecarioDao().findBySiape(siape);
+//    }
 }

@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,7 +20,6 @@ import javax.swing.JPanel;
  * Conteúdo de ajuda:
  * Colocar uma imagem em um JPanel: https://tjisblogging.blogspot.com/2013/04/how-to-set-background-image-to-jframe.html
  */
-
 /**
  *
  * @author Aluno
@@ -29,6 +30,16 @@ public class EditorIndexUI extends javax.swing.JFrame {
      * Creates new form EditorLoginUI
      */
     public EditorIndexUI() {
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -158,7 +169,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
         EditorLoginUI telaLogin = new EditorLoginUI();
-        
+
         try {
             URL resource = telaLogin.getClass().getResource("/icones/icon-window.png");
             BufferedImage image = ImageIO.read(resource);
@@ -166,7 +177,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
         } catch (IOException iOException) {
             iOException.printStackTrace();
         }
-        
+
         telaLogin.setTitle("Login");
         telaLogin.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
