@@ -6,6 +6,7 @@ package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.ArmarioController;
 import br.edu.ifpr.paranavai.armarios.entity.Armario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -113,21 +114,30 @@ public class ListagemArmariosUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ArmarioController ac = new ArmarioController();
-        Object [][] dados = {
-            {1, true, "Teste"},
-            {2, false, "Em manutenção"},
-            {3, false, ""},
-        };
-        // List<Armario> listaArmarios = ac.listarTodosArmarios();
         
+        ArmarioController controller = new ArmarioController();
+        
+        List<Armario> listaArmarios = new ArrayList<Armario>();
+        
+        if(this.jTextField1.getText() != null & !this.jTextField1.getText().isBlank()){
+            int filtro = Integer.valueOf(this.jTextField1.getText());
+            Armario armario = controller.listarArmario(filtro);
+            listaArmarios.add(armario);
+        } else{
+            listaArmarios = controller.listarTodosArmarios();
+        }
+        
+                
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         while (model.getRowCount() != 0) {
             model.removeRow(0);
         }
-        for(int i = 0; i < dados.length; i++){
-            model.addRow(dados[i]);
+        for(Armario armario : listaArmarios){
+            Object[] linha = {armario.getNumero().toString(), armario.isAtivo(), armario.getObservacoes()};
+            model.addRow(linha);
         }
+        
+        jTable1.setModel(model);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
