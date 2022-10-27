@@ -189,9 +189,9 @@ public class EditorListaEstudante extends javax.swing.JFrame {
         for (Estudante estudante : listaEstudantes) {
             Object[] dataLine = new Object[4];
             dataLine[0] = estudante.getNome();
-            dataLine[0] = estudante.getCpf();
-            dataLine[0] = estudante.getRa();
-            dataLine[0] = estudante.getEmail();
+            dataLine[1] = estudante.getCpf();
+            dataLine[2] = estudante.getRa();
+            dataLine[3] = estudante.getEmail();
             
             defaultTableModel.addRow(dataLine);
         }
