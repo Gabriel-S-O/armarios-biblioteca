@@ -67,7 +67,7 @@ public class GenericDao <T, I extends Serializable> {
         }
     }
 
-    public List<T> finAll() {
+    public List<T> findAll() {
         return entityManager.createQuery("FROM " + persistedClass.getName()).getResultList();
     }
 }

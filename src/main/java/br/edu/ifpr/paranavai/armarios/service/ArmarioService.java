@@ -15,12 +15,15 @@ import java.util.List;
 public class ArmarioService {
 
     public List<Armario> listarTodosArmarios() {
-        return new ArmarioDao().finAll();
+        return new ArmarioDao().findAll();
     }
 
     public Armario listarArmario(int numeroArmario) {
         return new ArmarioDao().findByNumero(numeroArmario);
     }
-    
-    
+
+    public void apagarArmario(int numeroArmario) {
+        new ArmarioDao().deleteByNumero(numeroArmario);
+        }
+     
 }

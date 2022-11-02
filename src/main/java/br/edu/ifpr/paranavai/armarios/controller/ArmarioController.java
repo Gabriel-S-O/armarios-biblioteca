@@ -14,13 +14,17 @@ import java.util.List;
  */
 public class ArmarioController {
     
-    ArmarioService as = new ArmarioService();
+    ArmarioService service = new ArmarioService();
     
     public List<Armario> listarTodosArmarios(){
-        return as.listarTodosArmarios();
+        return service.listarTodosArmarios();
     }
     
     public Armario listarArmario(int numeroArmario){
-        return as.listarArmario(numeroArmario);
+        return service.listarArmario(numeroArmario);
+    }
+    
+    public void apagarArmario(int numeroArmario){
+        service.apagarArmario(numeroArmario);
     }
 }
