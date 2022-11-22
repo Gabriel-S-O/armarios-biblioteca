@@ -1,6 +1,7 @@
 package br.edu.ifpr.paranavai.armarios.service;
 
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
+import br.edu.ifpr.paranavai.armarios.entity.Bibliotecario;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullCpfException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
@@ -8,19 +9,14 @@ import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import java.io.IOException;
 
-/**
- *
- *
- *
- * @author Aluno
- */
 public class LoginService {
 
     Estudante estudante = new Estudante();
+    Bibliotecario bibliotecario = new Bibliotecario();
+    
+    InfoDTO info = new InfoDTO();
 
     public InfoDTO verificaRa(String ra, String senha) throws NullRaException, NullPasswordException, IOException {
-
-        InfoDTO info = new InfoDTO();
 
         if (ra == null) {
             throw new NullRaException();
@@ -51,7 +47,6 @@ public class LoginService {
     }
 
     public InfoDTO verificaCPF(String cpf, String senha) throws NullCpfException, NullPasswordException {
-        InfoDTO info = new InfoDTO();
 
         if (cpf == null) {
             throw new NullCpfException();
@@ -80,4 +75,18 @@ public class LoginService {
             return info;
         }
     }
+
+//    public InfoDTO verificaSiape(String siape, String senha) throws NullSiapeException, NullPasswordException {
+//        InfoDTO info = new InfoDTO();
+//        
+//        if(siape == null){
+//            throw new NullSiapeException();
+//        }
+//        
+//        if(senha == null){
+//            throw new NullPasswordException();
+//        }
+//        
+//        bibliotecario = new BibliotecarioDao().findBySiape(siape);
+//    }
 }

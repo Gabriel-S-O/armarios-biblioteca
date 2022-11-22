@@ -11,4 +11,8 @@ public class ArmarioDao extends GenericDao<Armario, Long> {
     public Armario findByNumero(Integer numero) {
         return entityManager.createQuery("SELECT a FROM Armario a WHERE a.numero = :numero", Armario.class).setParameter("numero", numero).getSingleResult();
     }
+    
+    public void deleteByNumero(Integer numero){
+        entityManager.createQuery("DELETE a FROM Armario a WHERE a.numero = :numero", Armario.class).setParameter("numero", numero);      
+    }
 }

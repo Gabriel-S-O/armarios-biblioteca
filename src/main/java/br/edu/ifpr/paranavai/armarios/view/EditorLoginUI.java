@@ -10,7 +10,6 @@ import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
-import com.mysql.cj.util.StringUtils;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -19,6 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  *
@@ -32,6 +33,17 @@ public class EditorLoginUI extends javax.swing.JFrame {
      * Creates new form AuthEditorUI
      */
     public EditorLoginUI() {
+
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
         initComponents();
         this.setLocationRelativeTo(null);
         inputIdentificador.setDocument(new OnlyNumbers());
@@ -221,7 +233,7 @@ public class EditorLoginUI extends javax.swing.JFrame {
                     dispose();
                 } else {
                     EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(reserva);
-                    
+
                     try {
                         URL resource = telaDevolucao.getClass().getResource("/icones/icon-window.png");
                         BufferedImage image = ImageIO.read(resource);
