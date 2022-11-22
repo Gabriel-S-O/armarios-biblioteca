@@ -9,10 +9,6 @@ import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.service.ReservaService;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
-/**
- *
- * @author Yago Macinelli
- */
 public class ReservaController {
     
     ReservaService service = new ReservaService();

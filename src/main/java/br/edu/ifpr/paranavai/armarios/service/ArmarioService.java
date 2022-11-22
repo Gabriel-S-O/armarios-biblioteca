@@ -8,10 +8,6 @@ import br.edu.ifpr.paranavai.armarios.dao.ArmarioDao;
 import br.edu.ifpr.paranavai.armarios.entity.Armario;
 import java.util.List;
 
-/**
- *
- * @author Aluno
- */
 public class ArmarioService {
 
     public List<Armario> listarTodosArmarios() {
@@ -24,6 +20,6 @@ public class ArmarioService {
 
     public void apagarArmario(int numeroArmario) {
         new ArmarioDao().deleteByNumero(numeroArmario);
-        }
-     
+        }   
+    
 }

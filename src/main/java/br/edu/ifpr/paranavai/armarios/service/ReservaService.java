@@ -12,22 +12,20 @@ import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 
 import java.util.Date;
-import java.util.List;
 
-/**
- *
- * @author Yago Macinelli
- */
 public class ReservaService {
 
-    public InfoDTO realizaEmprestimo(Estudante estudante, String numArm) {
-        InfoDTO info = new InfoDTO();
-        Armario armario = new ArmarioDao().findByNumero(Integer.valueOf(numArm));
-        br.edu.ifpr.paranavai.armarios.entity.Reserva reserva = new ReservaDao().findByArmario(armario);
+    InfoDTO info = new InfoDTO();
+    
+    public InfoDTO realizaEmprestimo(Estudante estudante, String numeroArmario) {
+        
+        Armario armario = new ArmarioDao().findByNumero(Integer.valueOf(numeroArmario));
+        
+        Reserva reserva = new ReservaDao().findByArmario(armario);
 
         if (reserva.getDataHoraDevolucao() == null) {
             info.setError(true);
-            info.setMessage("Armário " + numArm + " já está reservado. Tente outro");
+            info.setMessage("Armário " + numeroArmario + " já está reservado. Tente outro");
             return info;
         } else {
             Reserva reservaToSave = new Reserva();
@@ -40,13 +38,13 @@ public class ReservaService {
             reservaDao.save(reservaToSave);
 
             info.setError(false);
-            info.setMessage("Armário " + numArm + " reservado com sucesso!");
+            info.setMessage("Armário " + numeroArmario + " reservado com sucesso!");
             return info;
         }
     }
 
     public InfoDTO realizaDevolucao(Reserva reserva) {
-        InfoDTO info = new InfoDTO();
+        
         ReservaDao reservaDao = new ReservaDao();
 
         try {
@@ -64,4 +62,5 @@ public class ReservaService {
             return info;
         }
     }
+    
 }
