@@ -15,9 +15,9 @@ public class LoginController {
         return service.verificaCPF(cpf, senha);
     }
     
-//    public InfoDTO verificaSIAPE(String siape, String senha) throws Exception {
-//        LoginService ls = new LoginService();
-//        return ls.verificaSiape(siape, senha);
-//    }
+    public InfoDTO verificaSIAPE(String siape, String senha) throws Exception {
+        LoginService ls = new LoginService();
+        return service.verificaSiape(siape, senha);
+    }
 
 }

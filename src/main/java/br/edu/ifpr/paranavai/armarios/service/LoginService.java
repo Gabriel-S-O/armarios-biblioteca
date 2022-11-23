@@ -1,11 +1,13 @@
 package br.edu.ifpr.paranavai.armarios.service;
 
+import br.edu.ifpr.paranavai.armarios.dao.BibliotecarioDao;
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
 import br.edu.ifpr.paranavai.armarios.entity.Bibliotecario;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullCpfException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullPasswordException;
 import br.edu.ifpr.paranavai.armarios.exceptions.NullRaException;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import br.edu.ifpr.paranavai.armarios.exceptions.NullSiapeException;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import java.io.IOException;
 
@@ -76,17 +78,33 @@ public class LoginService {
         }
     }
 
-//    public InfoDTO verificaSiape(String siape, String senha) throws NullSiapeException, NullPasswordException {
-//        InfoDTO info = new InfoDTO();
-//        
-//        if(siape == null){
-//            throw new NullSiapeException();
-//        }
-//        
-//        if(senha == null){
-//            throw new NullPasswordException();
-//        }
-//        
-//        bibliotecario = new BibliotecarioDao().findBySiape(siape);
-//    }
+    public InfoDTO verificaSiape(String siape, String senha) throws NullSiapeException, NullPasswordException {
+        
+        if(siape == null){
+            throw new NullSiapeException();
+        }
+        
+        if(senha == null){
+            throw new NullPasswordException();
+        }
+        
+        bibliotecario = new BibliotecarioDao().findBySiape(siape);
+        
+        if (bibliotecario != null) {
+            if (bibliotecario.getSenha().equals(senha)) {
+                info.setError(false);
+                info.setMessage("Sucesso no login!");
+                info.setObject(bibliotecario);
+            } else {
+                info.setError(true);
+                info.setMessage("Senha Inválida!");
+                return info;
+            }
+        } else {
+            info.setError(true);
+            info.setMessage("Siape inválido!");
+            return info;
+        }
+    }
+    
 }
