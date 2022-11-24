@@ -7,9 +7,16 @@ package br.edu.ifpr.paranavai.armarios.view;
 import br.edu.ifpr.paranavai.armarios.dao.ArmarioDao;
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +48,14 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        panelNovoEstudante = new javax.swing.JPanel();
+        novoEstudanteRA = new javax.swing.JTextField();
+        novoEstudanteNome = new javax.swing.JTextField();
+        novoEstudanteCPF = new javax.swing.JTextField();
+        novoEstudanteEmail = new javax.swing.JTextField();
+        buttonSalvarNovoEstudante = new javax.swing.JButton();
+        buttonCancelarNovoEstudante = new javax.swing.JButton();
+        labelRegistroNovoEstudante = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         fields = new javax.swing.JPanel();
@@ -75,6 +90,66 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        novoEstudanteRA.setText("RA");
+
+        novoEstudanteNome.setText("Nome");
+
+        novoEstudanteCPF.setText("CPF");
+
+        novoEstudanteEmail.setText("E-mail");
+
+        buttonSalvarNovoEstudante.setText("Salvar");
+        buttonSalvarNovoEstudante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSalvarNovoEstudanteActionPerformed(evt);
+            }
+        });
+
+        buttonCancelarNovoEstudante.setText("Cancelar");
+
+        labelRegistroNovoEstudante.setText("REGISTRO NOVO ESTUDANTE");
+
+        javax.swing.GroupLayout panelNovoEstudanteLayout = new javax.swing.GroupLayout(panelNovoEstudante);
+        panelNovoEstudante.setLayout(panelNovoEstudanteLayout);
+        panelNovoEstudanteLayout.setHorizontalGroup(
+            panelNovoEstudanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNovoEstudanteLayout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addGroup(panelNovoEstudanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(novoEstudanteNome)
+                    .addComponent(novoEstudanteCPF)
+                    .addComponent(novoEstudanteEmail)
+                    .addGroup(panelNovoEstudanteLayout.createSequentialGroup()
+                        .addComponent(buttonCancelarNovoEstudante)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addComponent(buttonSalvarNovoEstudante))
+                    .addComponent(novoEstudanteRA))
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNovoEstudanteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelRegistroNovoEstudante)
+                .addGap(97, 97, 97))
+        );
+        panelNovoEstudanteLayout.setVerticalGroup(
+            panelNovoEstudanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNovoEstudanteLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(labelRegistroNovoEstudante)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(novoEstudanteRA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(novoEstudanteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(novoEstudanteCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(novoEstudanteEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(panelNovoEstudanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSalvarNovoEstudante)
+                    .addComponent(buttonCancelarNovoEstudante))
+                .addGap(18, 18, 18))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,16 +207,9 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane7.setViewportView(tabelaEstudante);
@@ -278,7 +346,20 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBuscarArmariosActionPerformed
 
     private void menuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoActionPerformed
-        // TODO add your handling code here:
+        switch (jTabbedPane2.getSelectedIndex()) {
+            case 0:
+                NovoEstudanteUI novoEstudanteUI = new NovoEstudanteUI();
+
+                this.iconeFrame(novoEstudanteUI);
+                novoEstudanteUI.setTitle("Cadastro Novo Estudante");
+                novoEstudanteUI.setVisible(true);
+
+                break;
+                
+            case 1:
+                
+                break;
+        }
     }//GEN-LAST:event_menuNovoActionPerformed
 
     private void menuEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarActionPerformed
@@ -293,13 +374,14 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
                 estudanteSelecionado.setNome(this.tabelaEstudante.getModel().getValueAt(selectedRow, 1).toString());
                 estudanteSelecionado.setCpf(this.tabelaEstudante.getModel().getValueAt(selectedRow, 2).toString());
                 estudanteSelecionado.setEmail(this.tabelaEstudante.getModel().getValueAt(selectedRow, 3).toString());
+                estudanteSelecionado.setDataAtualizacao(new Date());
 
                 try {
                     estudanteDao.update(estudanteSelecionado);
                     JOptionPane.showMessageDialog(rootPane, "Estudante editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar editar estudante!", "Erro", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar editar estudante!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
 
                 break;
@@ -327,6 +409,22 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_menuApagarActionPerformed
+
+    private void buttonSalvarNovoEstudanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarNovoEstudanteActionPerformed
+        Estudante novoEstudante = new Estudante();
+        novoEstudante.setRa(this.novoEstudanteRA.getText());
+        novoEstudante.setNome(this.novoEstudanteNome.getText());
+        novoEstudante.setCpf(this.novoEstudanteCPF.getText());
+        novoEstudante.setEmail(this.novoEstudanteEmail.getText());
+
+        try {
+            new EstudanteDao().save(novoEstudante);
+            JOptionPane.showMessageDialog(rootPane, "Estudante criado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, "Erro ao criar estudante!", "Erro", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonSalvarNovoEstudanteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,10 +484,22 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         this.listaEstudante = new EstudanteDao().finAll();
         this.setDataTable(listaEstudante);
     }
+    
+    private void iconeFrame(JFrame tela) {
+        try {
+            URL resource = tela.getClass().getResource("/icones/icon-window.png");
+            BufferedImage image = ImageIO.read(resource);
+            tela.setIconImage(image);
+        } catch (IOException iOException) {
+            iOException.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBuscarArmarios;
     private javax.swing.JButton buttonBuscarEstudante;
+    private javax.swing.JButton buttonCancelarNovoEstudante;
+    private javax.swing.JButton buttonSalvarNovoEstudante;
     private javax.swing.JPanel fields;
     private javax.swing.JPanel fields1;
     private javax.swing.JTextField inputBuscaEstudante;
@@ -405,10 +515,16 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel labelRegistroNovoEstudante;
     private javax.swing.JMenu menu;
     private javax.swing.JMenuItem menuApagar;
     private javax.swing.JMenuItem menuEditar;
     private javax.swing.JMenuItem menuNovo;
+    private javax.swing.JTextField novoEstudanteCPF;
+    private javax.swing.JTextField novoEstudanteEmail;
+    private javax.swing.JTextField novoEstudanteNome;
+    private javax.swing.JTextField novoEstudanteRA;
+    private javax.swing.JPanel panelNovoEstudante;
     private javax.swing.JTable tabelaEstudante;
     private javax.swing.JPanel table;
     // End of variables declaration//GEN-END:variables
