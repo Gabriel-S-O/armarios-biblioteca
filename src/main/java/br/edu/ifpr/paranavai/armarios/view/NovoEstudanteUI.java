@@ -105,7 +105,7 @@ public class NovoEstudanteUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buttonSalvar))
                             .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +202,6 @@ public class NovoEstudanteUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonSalvar;
-    private javax.swing.JButton buttonSalvarNovoEstudante;
-    private javax.swing.JButton buttonSalvarNovoEstudante1;
     private javax.swing.JTextField inputCPF;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputNome;
@@ -215,17 +213,5 @@ public class NovoEstudanteUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField novoEstudanteCPF;
-    private javax.swing.JTextField novoEstudanteCPF1;
-    private javax.swing.JTextField novoEstudanteEmail;
-    private javax.swing.JTextField novoEstudanteEmail1;
-    private javax.swing.JTextField novoEstudanteNome;
-    private javax.swing.JTextField novoEstudanteNome1;
-    private javax.swing.JTextField novoEstudanteRA;
-    private javax.swing.JTextField novoEstudanteRA1;
-    private javax.swing.JPanel panelNovoEstudante;
-    private javax.swing.JPanel panelNovoEstudante1;
     // End of variables declaration//GEN-END:variables
 }
