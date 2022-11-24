@@ -8,6 +8,8 @@ import br.edu.ifpr.paranavai.armarios.dao.ArmarioDao;
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
 import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,7 +37,8 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     public EditorHomeBibliotecarioUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.buscaEstudantes();
+        buscaEstudantes();
+        refreshLists();
     }
 
     /**
@@ -353,7 +357,7 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
                 this.iconeFrame(novoEstudanteUI);
                 novoEstudanteUI.setTitle("Cadastro Novo Estudante");
                 novoEstudanteUI.setVisible(true);
-
+                
                 break;
                 
             case 1:
@@ -493,6 +497,23 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         } catch (IOException iOException) {
             iOException.printStackTrace();
         }
+    }
+    
+    
+    /**
+     * Método responsável por dar refresh nas listas a cada 1 minuto (60000 milisegundos)
+     */
+    private void refreshLists() {
+        Timer timer = new Timer(60000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscaEstudantes();
+            }
+        });
+        
+        timer.setRepeats(true);
+        timer.start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

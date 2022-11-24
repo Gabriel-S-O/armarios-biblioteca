@@ -156,6 +156,8 @@ public class NovoEstudanteUI extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Erro ao tentar criar estudante!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        
+        dispose();
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
