@@ -1,6 +1,6 @@
 package br.edu.ifpr.paranavai.armarios.entity;
 
-import br.edu.ifpr.paranavai.armarios.model.Pessoa;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +16,9 @@ public class Bibliotecario extends Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true)
     private String siape;
 }
+
+
+

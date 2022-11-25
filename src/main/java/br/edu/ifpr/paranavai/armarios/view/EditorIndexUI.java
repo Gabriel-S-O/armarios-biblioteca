@@ -65,7 +65,7 @@ public class EditorIndexUI extends javax.swing.JFrame {
         painelEsquerdo = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         painelDireito = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/estudantes.png"))); // NOI18N
@@ -122,11 +122,16 @@ public class EditorIndexUI extends javax.swing.JFrame {
         });
         painelDireito.setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Acesso para Administrar");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        painelDireito.add(jLabel3);
+        jButton2.setBackground(new java.awt.Color(0, 159, 72));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setText("Acesso para administrar");
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        painelDireito.add(jButton2);
 
         painelConteudo.add(painelDireito);
 
@@ -182,6 +187,22 @@ public class EditorIndexUI extends javax.swing.JFrame {
         telaLogin.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+        EditorLoginAdminUI telaLoginAdmin = new EditorLoginAdminUI();
+
+        try {
+            URL resource = telaLoginAdmin.getClass().getResource("/icones/icon-window.png");
+            BufferedImage image = ImageIO.read(resource);
+            telaLoginAdmin.setIconImage(image);
+        } catch (IOException iOException) {
+            iOException.printStackTrace();
+        }
+
+        telaLoginAdmin.setTitle("Login");
+        telaLoginAdmin.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,8 +241,8 @@ public class EditorIndexUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel painelBackground;
     private javax.swing.JPanel painelConteudo;
     private javax.swing.JPanel painelDireito;

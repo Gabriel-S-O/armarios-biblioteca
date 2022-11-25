@@ -5,9 +5,6 @@
 package br.edu.ifpr.paranavai.armarios.view;
 
 import br.edu.ifpr.paranavai.armarios.controller.LoginController;
-import br.edu.ifpr.paranavai.armarios.dao.ReservaDao;
-import br.edu.ifpr.paranavai.armarios.entity.Estudante;
-import br.edu.ifpr.paranavai.armarios.entity.Reserva;
 import br.edu.ifpr.paranavai.armarios.utils.InfoDTO;
 import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
 
@@ -27,7 +24,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
  */
 public class EditorLoginAdminUI extends javax.swing.JFrame {
 
-    private static boolean validaRa = true;
+    private static boolean validaSiape = true;
 
     /**
      * Creates new form AuthEditorUI
@@ -179,45 +176,24 @@ public class EditorLoginAdminUI extends javax.swing.JFrame {
             LoginController controle = new LoginController();
             String documento = this.inputIdentificador.getText();
             String senha = String.copyValueOf(this.passFieldSenha.getPassword());
-            InfoDTO response = validaRa ? controle.verificaRa(documento, senha) : controle.verificaCPF(documento, senha);
+            InfoDTO response = controle.verificaSIAPE(documento, senha);
 
             if (response.getError() == true && response.getObject() == null) {
                 JOptionPane.showMessageDialog(rootPane, response.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
             } else {
-                Estudante estudante = (Estudante) response.getObject();
-                Reserva reserva = new ReservaDao().findByEstudante(estudante);
-
-                if (reserva.getDataHoraDevolucao() != null) {
-                    EditorReservaUI telaReserva = new EditorReservaUI(estudante);
-
-                    try {
-                        URL resource = telaReserva.getClass().getResource("/icones/icon-window.png");
-                        BufferedImage image = ImageIO.read(resource);
-                        telaReserva.setIconImage(image);
-                    } catch (IOException iOException) {
-                        iOException.printStackTrace();
-                    }
-
-                    telaReserva.setTitle("Reserva");
-                    telaReserva.setVisible(true);
-
-                    dispose();
-                } else {
-                    EditorDevolucaoUI telaDevolucao = new EditorDevolucaoUI(reserva);
-
-                    try {
-                        URL resource = telaDevolucao.getClass().getResource("/icones/icon-window.png");
-                        BufferedImage image = ImageIO.read(resource);
-                        telaDevolucao.setIconImage(image);
-                    } catch (IOException iOException) {
-                        iOException.printStackTrace();
-                    }
-
-                    telaDevolucao.setTitle("Devolução");
-                    telaDevolucao.setVisible(true);
-
-                    dispose();
+                EditorHomeBibliotecarioUI telaAdmin = new EditorHomeBibliotecarioUI();
+                try {
+                    URL resource = telaAdmin.getClass().getResource("/icones/icon-window.png");
+                    BufferedImage image = ImageIO.read(resource);
+                    telaAdmin.setIconImage(image);
+                } catch (IOException iOException) {
+                    iOException.printStackTrace();
                 }
+
+                telaAdmin.setTitle("Administrador");
+                telaAdmin.setVisible(true);
+
+                dispose();
             }
         } catch (Exception ex) {
             Logger.getLogger(EditorLoginAdminUI.class.getName()).log(Level.SEVERE, null, ex);

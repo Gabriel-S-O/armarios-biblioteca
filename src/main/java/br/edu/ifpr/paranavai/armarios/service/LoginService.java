@@ -95,6 +95,7 @@ public class LoginService {
                 info.setError(false);
                 info.setMessage("Sucesso no login!");
                 info.setObject(bibliotecario);
+                return info;
             } else {
                 info.setError(true);
                 info.setMessage("Senha Inválida!");
