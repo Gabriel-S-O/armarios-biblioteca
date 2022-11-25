@@ -11,8 +11,13 @@ import lombok.NoArgsConstructor;
 
 public class Reserva {
     
+    private Integer id;
+    
     private Estudante estudante;
+    
     private Armario armario;
+    
     private Date dataHoraDevolucao;
+    
     private Date dataHoraEmprestimo;
 }

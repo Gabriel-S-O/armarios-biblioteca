@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @MappedSuperclass
 public class Pessoa {
-
+    
     private String nome;
 
     @Column(unique = true)
