@@ -193,10 +193,10 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
 
         tabelaArmarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null,  new Boolean(false), null},
+                {null,  new Boolean(false), null},
+                {null,  new Boolean(false), null},
+                {null,  new Boolean(false), null}
             },
             new String [] {
                 "N°", "Ativo", "Observações"
@@ -220,11 +220,12 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tabelaArmarios);
         if (tabelaArmarios.getColumnModel().getColumnCount() > 0) {
             tabelaArmarios.getColumnModel().getColumn(0).setResizable(false);
+            tabelaArmarios.getColumnModel().getColumn(0).setPreferredWidth(2);
             tabelaArmarios.getColumnModel().getColumn(1).setResizable(false);
-            tabelaArmarios.getColumnModel().getColumn(2).setResizable(false);
+            tabelaArmarios.getColumnModel().getColumn(1).setPreferredWidth(2);
         }
 
-        jPanel4.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        jPanel4.add(jScrollPane2, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -309,6 +310,11 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
                 break;
                 
             case 1:
+                NovoArmarioUI novoArmarioUI = new NovoArmarioUI();
+
+                this.iconeFrame(novoArmarioUI);
+                novoArmarioUI.setTitle("Cadastro Novo Armário");
+                novoArmarioUI.setVisible(true);
                 
                 break;
         }

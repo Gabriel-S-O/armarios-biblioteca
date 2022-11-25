@@ -44,7 +44,7 @@ public class NovoArmarioUI extends javax.swing.JFrame {
         buttonSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         radioButtonAtivo.setText("Ativo");
 
