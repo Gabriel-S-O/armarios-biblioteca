@@ -8,7 +8,6 @@ import br.edu.ifpr.paranavai.armarios.dao.ArmarioDao;
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
 import br.edu.ifpr.paranavai.armarios.entity.Armario;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
-import br.edu.ifpr.paranavai.armarios.utils.OnlyNumbers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -370,16 +369,34 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
                 
         switch (jTabbedPane2.getSelectedIndex()) {
             case 0:
-                EstudanteDao estudanteDao = new EstudanteDao();
-                int selectedRow = this.tabelaEstudante.getSelectedRow();
-                String ra = this.tabelaEstudante.getModel().getValueAt(selectedRow, 0).toString();    
+                int selectedRowEstudante = this.tabelaEstudante.getSelectedRow();
+                String ra = this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 0).toString();    
                 Estudante estudanteSelecionado = this.listaEstudante.stream().filter(estudante -> estudante.getRa().equals(ra)).findFirst().orElse(null);
                        
-                estudanteDao.removeById(estudanteSelecionado.getId());
+                try {
+                    new EstudanteDao().removeById(estudanteSelecionado);
+                    JOptionPane.showMessageDialog(rootPane, "Estudante excluido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar excluir estudante!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
                 
                 break;
-            case 1:
-                ArmarioDao armarioDao = new ArmarioDao();
+
+                
+            case 1:                
+                int selectedRowArmario = this.tabelaArmarios.getSelectedRow();
+                Integer numero = Integer.valueOf(this.tabelaArmarios.getModel().getValueAt(selectedRowArmario, 0).toString());
+                Armario armarioSelecionado = this.listaArmario.stream().filter(estudante -> estudante.getNumero().equals(numero)).findFirst().orElse(null);
+
+                try {
+                    new ArmarioDao().removeById(armarioSelecionado);
+                    JOptionPane.showMessageDialog(rootPane, "Armário excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar excluir armário!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+                
                 break;
         }
     }//GEN-LAST:event_menuApagarActionPerformed
@@ -482,12 +499,12 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     }
 
     private void buscaEstudantes() {
-        this.listaEstudante = new EstudanteDao().finAll();
+        this.listaEstudante = new EstudanteDao().findAll();
         this.setDataTable(listaEstudante);
     }
     
     private void buscaArmarios() {
-        this.listaArmario = new ArmarioDao().finAll();
+        this.listaArmario = new ArmarioDao().findAll();
         this.setDataTable(listaArmario);
     }
     
