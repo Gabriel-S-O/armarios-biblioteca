@@ -9,6 +9,6 @@ public class BibliotecarioDao extends GenericDao<Bibliotecario, Long> {
     }
 
     public Bibliotecario findBySiape(String siape) {
-        return entityManager.createQuery("SELECT b FROM bibliotecario b WHERE b.siape = :siape", Bibliotecario.class).setParameter("siape", siape).getResultStream().findFirst().orElse(null);
+        return entityManager.createQuery("SELECT b FROM Bibliotecario b WHERE b.siape = :siape", Bibliotecario.class).setParameter("siape", siape).getResultStream().findFirst().orElse(null);
     }
 }

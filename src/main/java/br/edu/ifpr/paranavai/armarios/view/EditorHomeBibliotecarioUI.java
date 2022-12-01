@@ -4,14 +4,23 @@
  */
 package br.edu.ifpr.paranavai.armarios.view;
 
-import br.edu.ifpr.paranavai.armarios.controller.ArmarioController;
 import br.edu.ifpr.paranavai.armarios.dao.ArmarioDao;
 import br.edu.ifpr.paranavai.armarios.dao.EstudanteDao;
 import br.edu.ifpr.paranavai.armarios.entity.Armario;
 import br.edu.ifpr.paranavai.armarios.entity.Estudante;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,8 +38,8 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     public EditorHomeBibliotecarioUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.buscaEstudantes();
-        this.buscaArmarios();
+        buscaEstudantes();
+        refreshLists();
     }
 
     /**
@@ -42,8 +51,6 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         fields = new javax.swing.JPanel();
@@ -59,34 +66,22 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         buttonBuscarArmarios = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelaArmario = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelaArmarios = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenu();
+        menuNovo = new javax.swing.JMenuItem();
+        menuEditar = new javax.swing.JMenuItem();
+        menuApagar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        inputBuscaEstudante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputBuscaEstudanteActionPerformed(evt);
+        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane2StateChanged(evt);
             }
         });
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         buttonBuscarEstudante.setText("Buscar");
         buttonBuscarEstudante.addActionListener(new java.awt.event.ActionListener() {
@@ -100,11 +95,11 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         fieldsLayout.setHorizontalGroup(
             fieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fieldsLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(inputBuscaEstudante, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonBuscarEstudante)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         fieldsLayout.setVerticalGroup(
             fieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,10 +127,10 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -147,6 +142,9 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
             }
         });
         jScrollPane7.setViewportView(tabelaEstudante);
+        if (tabelaEstudante.getColumnModel().getColumnCount() > 0) {
+            tabelaEstudante.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         table.add(jScrollPane7, java.awt.BorderLayout.CENTER);
 
@@ -157,12 +155,6 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setLayout(new java.awt.BorderLayout());
-
-        inputBuscarArmarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputBuscarArmariosActionPerformed(evt);
-            }
-        });
 
         buttonBuscarArmarios.setText("Buscar");
         buttonBuscarArmarios.addActionListener(new java.awt.event.ActionListener() {
@@ -176,11 +168,11 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         fields1Layout.setHorizontalGroup(
             fields1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fields1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(inputBuscarArmarios, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonBuscarArmarios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         fields1Layout.setVerticalGroup(
             fields1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,22 +190,22 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        tabelaArmario.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaArmarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null,  new Boolean(false), null},
+                {null,  new Boolean(false), null},
+                {null,  new Boolean(false), null},
+                {null,  new Boolean(false), null}
             },
             new String [] {
-                "Numero", "Ativo", "Observações"
+                "N°", "Ativo", "Observações"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -224,60 +216,15 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tabelaArmario);
+        jScrollPane2.setViewportView(tabelaArmarios);
+        if (tabelaArmarios.getColumnModel().getColumnCount() > 0) {
+            tabelaArmarios.getColumnModel().getColumn(0).setResizable(false);
+            tabelaArmarios.getColumnModel().getColumn(0).setPreferredWidth(2);
+            tabelaArmarios.getColumnModel().getColumn(1).setResizable(false);
+            tabelaArmarios.getColumnModel().getColumn(1).setPreferredWidth(2);
+        }
 
-        jPanel4.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jButton1.setText("Alterar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.setText("               ");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Excluir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        jPanel4.add(jPanel5, java.awt.BorderLayout.PAGE_END);
+        jPanel4.add(jScrollPane2, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -285,60 +232,188 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
+        menu.setText("Menu");
+
+        menuNovo.setText("Novo");
+        menuNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNovoActionPerformed(evt);
+            }
+        });
+        menu.add(menuNovo);
+
+        menuEditar.setText("Editar");
+        menuEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarActionPerformed(evt);
+            }
+        });
+        menu.add(menuEditar);
+
+        menuApagar.setText("Apagar");
+        menuApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuApagarActionPerformed(evt);
+            }
+        });
+        menu.add(menuApagar);
+
+        jMenuBar1.add(menu);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputBuscaEstudanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputBuscaEstudanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputBuscaEstudanteActionPerformed
-
     private void buttonBuscarEstudanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarEstudanteActionPerformed
-        List<Estudante> listaEstudanteFiltrada = this.listaEstudante.stream()
-                .filter(l -> l.getNome().toUpperCase()
-                .contains(this.inputBuscaEstudante.getText().toUpperCase())
-                || l.getCpf()
-                        .contains(this.inputBuscaEstudante.getText())
-                || l.getRa()
-                        .contains(this.inputBuscaEstudante.getText())
-                || l.getEmail().toUpperCase()
-                        .contains(this.inputBuscaEstudante.getText().toUpperCase()))
-                .collect(Collectors.toList());
-
-        this.setDataTableEstudante(listaEstudanteFiltrada);
+        if (!this.inputBuscarArmarios.getText().isEmpty()) {
+            List<Estudante> listaEstudanteFiltrada = this.listaEstudante.stream()
+                    .filter(l -> l.getNome().toUpperCase()
+                    .contains(this.inputBuscaEstudante.getText().toUpperCase())
+                    || l.getCpf()
+                            .contains(this.inputBuscaEstudante.getText())
+                    || l.getRa()
+                            .contains(this.inputBuscaEstudante.getText())
+                    || l.getEmail().toUpperCase()
+                            .contains(this.inputBuscaEstudante.getText().toUpperCase()))
+                    .collect(Collectors.toList());
+            
+            this.setDataTable(listaEstudanteFiltrada);
+        } else {
+            this.setDataTable(listaEstudante);
+        }
     }//GEN-LAST:event_buttonBuscarEstudanteActionPerformed
 
-    private void inputBuscarArmariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputBuscarArmariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputBuscarArmariosActionPerformed
-
     private void buttonBuscarArmariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarArmariosActionPerformed
-        List<Armario> listaArmarioFiltrada = this.listaArmario.stream()
-                .filter(l -> l.getNumero().toString()
-                .contains(this.inputBuscarArmarios.getText().toUpperCase())
-                || l.getNumero().toString()
-                        .contains(this.inputBuscarArmarios.getText())
-                || l.getObservacoes()
-                        .contains(this.inputBuscarArmarios.getText().toUpperCase()))
-                .collect(Collectors.toList());
+        if (!this.inputBuscarArmarios.getText().isEmpty()) {
+            List<Armario> listaArmarioFiltrada = this.listaArmario.stream()
+                    .filter(l -> l.getNumero().equals(Integer.valueOf(this.inputBuscarArmarios.getText()))
+                    || l.getAtivo().equals(Boolean.valueOf(this.inputBuscarArmarios.getText())))
+                    .collect(Collectors.toList());
 
-        this.setDataTableArmario(listaArmarioFiltrada);
+            this.setDataTable(listaArmarioFiltrada);
+        } else {
+            this.setDataTable(listaArmario);
+        }
     }//GEN-LAST:event_buttonBuscarArmariosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ArmarioController armarioController = new ArmarioController();
-        if(this.jTextField2 != null){
-          int numeroArmario = Integer.valueOf(this.jTextField2.getText());
-          armarioController.apagarArmario(numeroArmario);
+    private void menuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoActionPerformed
+        switch (jTabbedPane2.getSelectedIndex()) {
+            case 0:
+                NovoEstudanteUI novoEstudanteUI = new NovoEstudanteUI();
+
+                this.iconeFrame(novoEstudanteUI);
+                novoEstudanteUI.setTitle("Cadastro Novo Estudante");
+                novoEstudanteUI.setVisible(true);
+                
+                break;
+                
+            case 1:
+                NovoArmarioUI novoArmarioUI = new NovoArmarioUI();
+
+                this.iconeFrame(novoArmarioUI);
+                novoArmarioUI.setTitle("Cadastro Novo Armário");
+                novoArmarioUI.setVisible(true);
+                
+                break;
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_menuNovoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void menuEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarActionPerformed
+        switch (jTabbedPane2.getSelectedIndex()) {
+            case 0:
+                EstudanteDao estudanteDao = new EstudanteDao();
+                int selectedRowEstudante = this.tabelaEstudante.getSelectedRow();
+                String ra = this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 0).toString();
+                Estudante estudanteSelecionado = this.listaEstudante.stream().filter(estudante -> estudante.getRa().equals(ra)).findFirst().orElse(null);
+                
+                estudanteSelecionado.setRa(this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 0).toString());
+                estudanteSelecionado.setNome(this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 1).toString());
+                estudanteSelecionado.setCpf(this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 2).toString());
+                estudanteSelecionado.setEmail(this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 3).toString());
+                estudanteSelecionado.setDataAtualizacao(new Date());
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+                try {
+                    estudanteDao.update(estudanteSelecionado);
+                    JOptionPane.showMessageDialog(rootPane, "Estudante editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar editar estudante!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+
+                break;
+                
+            case 1:
+                ArmarioDao armarioDao = new ArmarioDao();
+                int selectedRowArmario = this.tabelaArmarios.getSelectedRow();
+                Integer numero = Integer.valueOf(this.tabelaArmarios.getModel().getValueAt(selectedRowArmario, 0).toString());
+                Armario armarioSelecionado = this.listaArmario.stream().filter(estudante -> estudante.getNumero().equals(numero)).findFirst().orElse(null);
+                
+                armarioSelecionado.setNumero(Integer.valueOf(this.tabelaArmarios.getModel().getValueAt(selectedRowArmario, 0).toString()));
+                armarioSelecionado.setAtivo(Boolean.valueOf(this.tabelaArmarios.getModel().getValueAt(selectedRowArmario, 1).toString()));
+                armarioSelecionado.setObservacoes(this.tabelaArmarios.getModel().getValueAt(selectedRowArmario, 2).toString());
+
+                try {
+                    armarioDao.update(armarioSelecionado);
+                    JOptionPane.showMessageDialog(rootPane, "Armário editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar editar armário!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                break;
+        }
+    }//GEN-LAST:event_menuEditarActionPerformed
+
+    private void menuApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuApagarActionPerformed
+                
+        switch (jTabbedPane2.getSelectedIndex()) {
+            case 0:
+                int selectedRowEstudante = this.tabelaEstudante.getSelectedRow();
+                String ra = this.tabelaEstudante.getModel().getValueAt(selectedRowEstudante, 0).toString();    
+                Estudante estudanteSelecionado = this.listaEstudante.stream().filter(estudante -> estudante.getRa().equals(ra)).findFirst().orElse(null);
+                       
+                try {
+                    new EstudanteDao().removeById(estudanteSelecionado);
+                    JOptionPane.showMessageDialog(rootPane, "Estudante excluido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar excluir estudante!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                break;
+
+                
+            case 1:                
+                int selectedRowArmario = this.tabelaArmarios.getSelectedRow();
+                Integer numero = Integer.valueOf(this.tabelaArmarios.getModel().getValueAt(selectedRowArmario, 0).toString());
+                Armario armarioSelecionado = this.listaArmario.stream().filter(estudante -> estudante.getNumero().equals(numero)).findFirst().orElse(null);
+
+                try {
+                    new ArmarioDao().removeById(armarioSelecionado);
+                    JOptionPane.showMessageDialog(rootPane, "Armário excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao tentar excluir armário!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                break;
+        }
+    }//GEN-LAST:event_menuApagarActionPerformed
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+        switch (jTabbedPane2.getSelectedIndex()) {
+            case 0:
+                buscaEstudantes();
+                
+                break;
+                
+            case 1:
+                buscaArmarios();
+                
+                break;
+        }
+    }//GEN-LAST:event_jTabbedPane2StateChanged
 
     /**
      * @param args the command line arguments
@@ -376,49 +451,89 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
         });
     }
 
-    public void setDataTableEstudante(List<Estudante> listaEstudantes) {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) tabelaEstudante.getModel();
+    public void setDataTable(List<?> lista) {      
+        Class<?> classe = lista.get(0).getClass();
+        
+        switch (classe.getName()) {
+            case "br.edu.ifpr.paranavai.armarios.entity.Estudante":
 
-        while (defaultTableModel.getRowCount() != 0) {
-            defaultTableModel.removeRow(0);
-        }
+                DefaultTableModel tabelaEstudanteModel = (DefaultTableModel) tabelaEstudante.getModel();
 
-        for (Estudante estudante : listaEstudantes) {
-            Object[] dataLine = new Object[4];
-            dataLine[0] = estudante.getNome();
-            dataLine[1] = estudante.getCpf();
-            dataLine[2] = estudante.getRa();
-            dataLine[3] = estudante.getEmail();
+                while (tabelaEstudanteModel.getRowCount() != 0) {
+                    tabelaEstudanteModel.removeRow(0);
+                }
+                
+                for (Estudante estudante : (List<Estudante>) lista) {
+                    Object[] dataLine = new Object[4];
+                    
+                    dataLine[0] = estudante.getRa();
+                    dataLine[1] = estudante.getNome();
+                    dataLine[2] = estudante.getCpf();
+                    dataLine[3] = estudante.getEmail();
 
-            defaultTableModel.addRow(dataLine);
+                    tabelaEstudanteModel.addRow(dataLine);
+                }
+                
+                break;
+                
+            case "br.edu.ifpr.paranavai.armarios.entity.Armario":
+                
+                DefaultTableModel tabelaArmarioModel = (DefaultTableModel) tabelaArmarios.getModel();
+
+                while (tabelaArmarioModel.getRowCount() != 0) {
+                    tabelaArmarioModel.removeRow(0);
+                }
+                
+                for (Armario armario : (List<Armario>) lista) {
+                    Object[] dataLine = new Object[3];
+                    
+                    dataLine[0] = armario.getNumero();
+                    dataLine[1] = armario.getAtivo();
+                    dataLine[2] = armario.getObservacoes();
+
+                    tabelaArmarioModel.addRow(dataLine);
+                }
+                
+                break;
         }
     }
 
-    public void buscaEstudantes() {
+    private void buscaEstudantes() {
         this.listaEstudante = new EstudanteDao().findAll();
-        this.setDataTableEstudante(listaEstudante);
+        this.setDataTable(listaEstudante);
     }
     
-    public void setDataTableArmario(List<Armario> listaArmarios) {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) tabelaArmario.getModel();
-        
-        while (defaultTableModel.getRowCount() != 0) {
-            defaultTableModel.removeRow(0);
-        }
-        
-        for (Armario armario : listaArmarios) {
-            Object[] dataLine = new Object[4];
-            dataLine[0] = armario.getNumero();
-            dataLine[1] = armario.isAtivo();
-            dataLine[2] = armario.getObservacoes();
-
-            defaultTableModel.addRow(dataLine);
-        }
-    }
-    
-    public void buscaArmarios() {
+    private void buscaArmarios() {
         this.listaArmario = new ArmarioDao().findAll();
-        this.setDataTableArmario(listaArmario);
+        this.setDataTable(listaArmario);
+    }
+    
+    private void iconeFrame(JFrame tela) {
+        try {
+            URL resource = tela.getClass().getResource("/icones/icon-window.png");
+            BufferedImage image = ImageIO.read(resource);
+            tela.setIconImage(image);
+        } catch (IOException iOException) {
+            iOException.printStackTrace();
+        }
+    }
+    
+    
+    /**
+     * Método responsável por dar refresh nas listas a cada 1 minuto (60000 milisegundos)
+     */
+    private void refreshLists() {
+        Timer timer = new Timer(60000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscaEstudantes();
+                buscaArmarios();
+            }
+        });
+        
+        timer.setRepeats(true);
+        timer.start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -428,20 +543,19 @@ public class EditorHomeBibliotecarioUI extends javax.swing.JFrame {
     private javax.swing.JPanel fields1;
     private javax.swing.JTextField inputBuscaEstudante;
     private javax.swing.JTextField inputBuscarArmarios;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTable tabelaArmario;
+    private javax.swing.JMenu menu;
+    private javax.swing.JMenuItem menuApagar;
+    private javax.swing.JMenuItem menuEditar;
+    private javax.swing.JMenuItem menuNovo;
+    private javax.swing.JTable tabelaArmarios;
     private javax.swing.JTable tabelaEstudante;
     private javax.swing.JPanel table;
     // End of variables declaration//GEN-END:variables

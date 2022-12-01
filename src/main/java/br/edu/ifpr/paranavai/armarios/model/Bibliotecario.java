@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Bibliotecario extends Pessoa{
+    
+    private Integer id;
+    
     private String siape;
 
     public Bibliotecario(String siape, String cpf, String nome, String email, String telefone, String senha, int chave, boolean ativo, Date dataAtualizacao, Date dataCriacao) {

@@ -56,10 +56,11 @@ public class GenericDao <T, I extends Serializable> {
         }
     }
 
-    public void removeById(int id) {
+    public void removeById(T removedObject) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(id);
+            T mergedObject = entityManager.merge(removedObject);
+            entityManager.remove(mergedObject);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

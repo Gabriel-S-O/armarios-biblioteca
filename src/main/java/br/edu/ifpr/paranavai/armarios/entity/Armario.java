@@ -18,7 +18,7 @@ public class Armario {
     @Column(unique = true)
     private Integer numero;
 
-    private boolean ativo;
+    private Boolean ativo;
 
     private String observacoes;
 }

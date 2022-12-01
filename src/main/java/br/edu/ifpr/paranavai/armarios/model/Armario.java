@@ -10,7 +10,11 @@ import lombok.NoArgsConstructor;
 
 public class Armario {
     
+    private Integer id;
+    
     private String numero;
+    
     private boolean ativo;
+    
     private String observacoes;
 }
