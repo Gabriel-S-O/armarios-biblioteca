@@ -46,7 +46,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -118,7 +118,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CADASTRO ARM&#xc1;RIO"/>
+        <Property name="text" type="java.lang.String" value="Cadastrar Arm&#xe1;rio"/>
       </Properties>
     </Component>
   </SubComponents>

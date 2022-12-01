@@ -6,11 +6,11 @@
         <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
         </property>
-        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.password">Z9#-WW9.n</property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://{}/armarios?useSSL=false&amp;serverTimezone=UTC
+            jdbc:mysql://132.226.160.198:3306/armarios?useSSL=false&amp;serverTimezone=UTC
         </property>
-        <property name="hibernate.connection.username"></property>
+        <property name="hibernate.connection.username">SilvaYagoIFPR</property>
         <property name="hibernate.dialect">
             org.hibernate.dialect.MySQLDialect
         </property>

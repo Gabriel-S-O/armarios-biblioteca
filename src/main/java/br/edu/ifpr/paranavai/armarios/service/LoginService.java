@@ -98,7 +98,7 @@ public class LoginService {
                 return info;
             } else {
                 info.setError(true);
-                info.setMessage("Senha Inválida!");
+                info.setMessage("Senha inválida!");
                 return info;
             }
         } else {

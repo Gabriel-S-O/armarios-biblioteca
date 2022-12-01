@@ -8,10 +8,10 @@
     <persistence-unit name="armarios-biblioteca" transaction-type="RESOURCE_LOCAL">
         <properties>
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:mysql://{}/armarios?useSSL=false&amp;serverTimezone=UTC" />
+                      value="jdbc:mysql://132.226.160.198:3306/armarios?useSSL=false&amp;serverTimezone=UTC" />
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="jakarta.persistence.jdbc.user" value="" />
-            <property name="jakarta.persistence.jdbc.password" value="" />
+            <property name="jakarta.persistence.jdbc.user" value="SilvaYagoIFPR" />
+            <property name="jakarta.persistence.jdbc.password" value="Z9#-WW9.n" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
             <property name="hibernate.dialect" 	value="org.hibernate.dialect.MySQLDialect" />

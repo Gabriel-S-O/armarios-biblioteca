@@ -66,7 +66,7 @@ public class NovoArmarioUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("CADASTRO ARMÁRIO");
+        jLabel3.setText("Cadastrar Armário");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,7 +90,7 @@ public class NovoArmarioUI extends javax.swing.JFrame {
                                     .addComponent(buttonSalvar))
                                 .addComponent(inputObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(142, 142, 142)
                         .addComponent(jLabel3)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
